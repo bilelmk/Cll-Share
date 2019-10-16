@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/user/channels"></ion-back-button>
+    </ion-buttons>
+    <ion-title>channel-lab</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+  <div class="bg-image" (ngClass)="['bg-image-X']"></div>
+</ion-content>
+<ion-footer translucent  (ngClass)="['custom-footer']">
+    <ion-row class="input-position" (ngClass)="['custom-footer-row']">
+      <ion-col size="9">
+        <ion-input class="input restrict" type="text" placeholder="Type a message" [(ngModel)]="input" padding-start></ion-input>
+      </ion-col>
+      <ion-col size="3">
+        <ion-button shape="round" class="send-button" color="d3blue" (click)="send()">
+          <ion-text color="light">SEND</ion-text>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>
