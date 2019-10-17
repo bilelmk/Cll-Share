@@ -1,0 +1,110 @@
+type Member{
+    id: String!
+    firstName: String!
+    lastName: String!
+    photo: File
+    birthDate: String!
+    mail: String!
+    address: String
+    active: MemberActiveStatus!
+    otherInfo: [String!]
+    password: String!
+    option: Option!
+    role: MemberRole
+    posts: [Post!]
+    tasks: [EventTask!]
+    channels: [Channel!]
+    messengers: [Messenger!]
+    workshopsPresentedByUser: [Workshop!] 
+    createdAt: String!
+    updatedAt: String!
+}
+
+enum MemberRole{
+    ADMIN
+    SIMPLE_USER
+}
+
+enum MemberActiveStatus{
+    ONLINE
+    OFFLINE
+}
+
+
+type Option{
+    id: String!
+    NotifyWorkshops: Boolean!
+    NotifyEvents: Boolean!
+    NotifyMeetings: Boolean!
+    langue: Language!
+    createdAt: String!
+    updatedAt: String!
+}
+
+enum Language{
+    ARABE
+    FRENCH
+    ENGLISH
+}
+
+extend type Query{
+    me: Member!
+    members(query:String, orderBy:OrderByOption, pagination: PaginationOptionInput): [Member!]!
+    member(id: String, email:String): Member!
+}
+
+extend type Subscription{
+    member: Member!
+}
+
+extend type Mutation{
+    signIn(data: SignInInput!): Member!
+    signUp(data: SignUpInput!): Member!
+    updateMe(data: UpdateMemberInput!): Member!
+    changeMemberRole(id: String!, role: MemberRole!): Member
+    deleteMe: Member!
+    deleteMember(id: String!): Member!
+}
+
+input SignInInput{
+    email: String!
+    password: String!
+}
+input SignUpInput{
+    firstName: String!
+    lastName: String!
+    photo: CreateFileInput
+    role: MemberRole
+    birthDate: String!
+    mail: String!
+    address: String
+    otherInfo: [String!]
+    password: String!
+    option: CreateOptionInput!
+}
+input CreateOptionInput{
+    NotifyWorkshops: Boolean!
+    NotifyEvents: Boolean!
+    NotifyMeetings: Boolean!
+    langue: Language!
+}
+
+input UpdateMemberInput{
+    firstName: String
+    lastName: String
+    photo: CreateFileInput
+    role: MemberRole
+    birthDate: String
+    mail: String
+    address: String
+    otherInfo: [String!]
+    password: String
+    option: UpdateOptionInput
+}
+
+input UpdateOptionInput{
+    NotifyWorkshops: Boolean
+    NotifyEvents: Boolean
+    NotifyMeetings: Boolean
+    langue: Language
+}

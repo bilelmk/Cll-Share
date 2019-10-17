@@ -1,0 +1,41 @@
+type Workshop{
+    id: String!
+    name: String!
+    dateTime: String!
+    subject: String!
+    details: String!
+    presenter: Member!
+    createdAt: String!
+    updatedAt: String!
+}
+
+extend type Query{
+    workshops(query: String, orderBy:OrderByOption, pagination: PaginationOptionInput): [Workshop!]!
+    workshop(id: String!): Workshop!
+}
+
+extend type Subscription{
+    workshop: Workshop!
+}
+
+extend type Mutation{
+    createWorkshop(data: CreateWorkshopInput!): Workshop!
+    updateWorkshop(id: String!, data: UpdateWorkshopInput!): Workshop!
+    deleteWorkshop(id: String!): Workshop!
+}
+
+input CreateWorkshopInput{
+    name: String!
+    dateTime: String!
+    subject: String!
+    details: String!
+    presenterId: String
+}
+
+input UpdateWorkshopInput{
+    name: String
+    dateTime: String
+    subject: String
+    details: String
+    presenterId: String
+}

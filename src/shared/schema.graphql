@@ -1,0 +1,39 @@
+type File{
+    id: String!
+    name: String!
+    mimetype: String!
+    encoding: String!
+    createdAt: String!
+    updatedAt: String!
+}
+
+input CreateFileInput{
+    name: String!
+    mimetype: String!
+    encoding: String!
+}
+
+enum OrderByOption{
+    NAME_ASC
+    NAME_DESC
+    CREATION_DATE_ASC
+    CREATION_DATE_DESC
+}
+
+input PaginationOptionInput{
+    skip: Int
+    bring: Int
+}
+
+type Query{
+    _empty: String
+}
+
+type Mutation{
+    _empty: String
+}
+
+
+type Subscription{
+    _empty: String
+}

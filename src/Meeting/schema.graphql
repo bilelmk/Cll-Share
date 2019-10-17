@@ -1,0 +1,35 @@
+type Meeting{
+    id: String!
+    title: String!
+    dateTime: String!
+    points: [String!]
+    createdAt: String!
+    updatedAt: String!
+}
+
+extend type Query{
+    meetings(query: String, orderBy:OrderByOption, pagination: PaginationOptionInput): [Meeting!]!
+    meeting(id: String!): Meeting!
+}
+
+extend type Subscription{
+    meeting: Meeting!
+}
+
+extend type Mutation{
+    createMeeting(data: CreateMeetingInput!): Meeting!
+    updateMeeting(id: String!, data: UpdateMeetingInput!): Meeting!
+    deleteMeeting(id: String!): Meeting!
+}
+
+input CreateMeetingInput{
+    title: String!
+    dateTime: String!
+    points: [String!]!
+}
+
+input UpdateMeetingInput{
+    title: String
+    dateTime: String
+    points: [String!]
+}

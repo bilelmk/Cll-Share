@@ -1,0 +1,41 @@
+type Messenger{
+    id: String!
+    firstInterlocutor: Member!
+    secondInterlocutor: Member!
+    messages: [Message!]
+    createdAt: String!
+    updatedAt: String!
+}
+
+type Message{
+    id: String!
+    author: Member!
+    content: String!
+    images: [File!]
+    files: [File!]
+    createdAt: String!
+    updatedAt: String!
+}
+
+extend type Query{
+    messenger(otherInterlocutorId: String, id: String): Messenger!
+    messengers(memberId: String, query: String, orderBy:OrderByOption, pagination: PaginationOptionInput): [Messenger!]!
+    messages(messengerId:String ,query: String, orderBy:OrderByOption, pagination: PaginationOptionInput): [Message!]!
+    message(id: String): Message!
+}
+
+extend type Subscription{
+    messger: Messenger!
+}
+
+extend type Mutation{
+    createMessenger(otherInterlocutorId: String!): Messenger!
+    deleteMessenger(id: String, otherInterlocutorId: String): Messenger!
+    addMessageToMessenger(messengerId: String, otherInterlocutorId: String, data: MessageCreateInput!): Message!
+}
+
+input MessageCreateInput{
+    content: String!
+    images: [CreateFileInput!]
+    files: [CreateFileInput!]
+}

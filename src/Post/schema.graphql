@@ -1,0 +1,33 @@
+type Post{
+    id: String!
+    content: String!
+    images: [File!]
+    files: [File!]
+    comments: [Commentary!]
+    createdAt: String!
+    updatedAt: String!
+}
+
+type Commentary{
+    id: String!
+    content: String!
+    createdAt: String!
+    updatedAt: String!
+}
+
+extend type Query{
+    post(id: String!): Post!
+    posts(ChannelId: String, query: String, orderBy:OrderByOption, pagination: PaginationOptionInput): [Post!]!
+}
+extend type Mutation{
+    addPostToChannel(channelId: String, channelName: String, data: CreatePostInput): Post!
+    deletePost(id: String!): Post!
+    commentAPost(postId: String!, content: String!): Commentary!
+    deleteCommentary(id: String!): Commentary!
+}
+
+input CreatePostInput{
+    content: String!
+    images: [CreateFileInput!]
+    files: [CreateFileInput!]
+}

@@ -1,0 +1,53 @@
+type Event{
+    id: String!
+    name: String!
+    dateTime: String!
+    details: [String!]
+    tasks: [EventTask!]
+    createdAt: String!
+    updatedAt: String!
+}
+
+type EventTask{
+    id: String!
+    member: Member!
+    task: String!
+    event: Event!
+    createdAt: String!
+    updatedAt: String!
+}
+
+extend type Query{
+    events(query: String, orderBy:OrderByOption, pagination: PaginationOptionInput): [Event!]!
+    event(id: String!): Event
+}
+
+extend type Subscription{
+    event: Event!
+}
+
+extend type Mutation{
+    createEvent(data: CreateEventInput!): Event!
+    updateEvent(id: String!, data: UpdateEventInput!): Event!
+    deleteEvent(id: String!): Event!
+}
+
+input CreateEventInput{
+    name: String!
+    dateTime: String!
+    details: [String!]
+    tasks: CreateTasksInput
+}
+
+input UpdateEventInput{
+    name: String
+    dateTime: String
+    details: [String!]
+    tasksToAdd: CreateTasksInput
+    tasksIdToRemove: [String!]
+}
+
+input CreateTasksInput{
+    memberId: [String!]!
+    task: String!
+}

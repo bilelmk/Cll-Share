@@ -1,0 +1,50 @@
+type Channel{
+    id: String!
+    name: String!
+    description: String!
+    subject: String!
+    master: Member!
+    members: [Member!]!
+    posts: [Post!]
+    createdAt: String!
+    updatedAt: String!
+}
+
+extend type Query{
+    channels(memberId: String, query: String, orderBy:OrderByOption, pagination: PaginationOptionInput): [Channel!]!
+    channel(name: String ,id: String): Channel!
+}
+
+extend type Subscription{
+    channel: Channel!
+}
+
+extend type Mutation{
+    createChannel(data: CreateChannelInput!): Channel!
+    updateChannel(id: String,name: String ,data: UpdateChannelInput!): Channel!
+    deleteChannel(id: String, names: String): Channel!
+}
+
+input CreateChannelInput{
+    name: String!
+    description: String!
+    subject: String!
+    memberIds: [String!]!
+}
+
+input UpdateChannelInput{
+    name: String
+    description: String
+    subject: String
+    memberManipulation: manipulateChannelMembersInput
+}
+
+input manipulateChannelMembersInput{
+    action: manipulateChannelMembersAction!
+    membersIds: [String!]!
+}
+
+enum manipulateChannelMembersAction{
+    ADD
+    REMOVE
+}
