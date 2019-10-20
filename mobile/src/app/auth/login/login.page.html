@@ -1,0 +1,38 @@
+<ion-content color="primary" padding>
+  <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+    <ion-grid>
+      <ion-row color="primary" text-center  >
+        <ion-col align-self-center size-sm="6" offset-sm="3">
+          <div text-center>
+            <h3>Login</h3>
+          </div>
+          <div padding>
+            <ion-item>
+              <ion-label position="floating">E-mail</ion-label>
+              <ion-input type="email" ngModel name="email" required email #emailCtrl="ngModel"></ion-input>
+            </ion-item>
+            <ion-item *ngIf="!emailCtrl.valid && emailCtrl.touched" lines="none">
+              <ion-label>Should be a valid email address.</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Password</ion-label>
+              <ion-input type="email" ngModel name="password" required #passwordCtrl="ngModel"></ion-input>
+            </ion-item>
+            <ion-item *ngIf="!passwordCtrl.valid && passwordCtrl.touched" lines="none">
+              <ion-label>Invalid password!</ion-label>
+            </ion-item>
+          </div>
+          <div padding>
+            <ion-button type="submit"   expand="block" (click)="onLogin()" [disabled]="!f.valid">Login</ion-button>
+          </div>
+          <div text-center>
+            If you don't have an account, please <u (click)="onRegister()">
+            register</u> first!
+          </div>
+        </ion-col>
+      </ion-row>
+
+
+    </ion-grid>
+  </form>
+</ion-content>
