@@ -1,0 +1,7 @@
+{
+  "name": "slack",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

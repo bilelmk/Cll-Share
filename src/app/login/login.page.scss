@@ -1,0 +1,46 @@
+$white-color: rgb(255, 255, 255);
+$dark-color: rgb(49, 49, 49);
+$height100: 100%;
+$bg: url("/assets/img/bg.jpg");
+
+
+.login {
+    width:100%;
+    height: $height100;
+    //-webkit-background: $bg no-repeat;
+    background: $bg no-repeat;
+    background-size: cover;
+    
+}
+
+ion-row {
+    height: $height100;
+}
+
+
+
+ion-button {
+    font-weight: 300;
+    width: 200px;
+}
+
+@media (min-width: 240px) and (max-width: 768px) {
+    ion-grid {
+        background: $white-color;
+    }
+    ion-col {
+        border: none;
+        
+    }
+}
+
+.login-box{
+    border: 1px solid #488aff;
+    border-radius: 30px;
+    background: $white-color;
+}
+
+.Logo{
+    height: 150px;
+    width: 150px;
+}
