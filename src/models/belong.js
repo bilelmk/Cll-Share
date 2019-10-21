@@ -1,19 +1,18 @@
-const mongoose = require('mongoose');
-const member=require('./member');
-const channel=require('./channel')
 
-const belongSchema = mongoose.Schema({
+import {Schema, model} from 'mongoose'
+
+const belongSchema = Schema({
    date:{
         type:String
     },
     member:{
-        type:mongoose.Schema.Types.ObjectId,
+        type:Schema.Types.ObjectId,
         ref:'member'
     },
     channel:{
-        type:mongoose.Schema.Types.ObjectId,
+        type:Schema.Types.ObjectId,
         ref:'channel'
     }
 })
 
-module.exports=mongoose.model('belong',belongSchema)
+export default model('belong',belongSchema)
