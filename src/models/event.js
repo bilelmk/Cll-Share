@@ -1,16 +1,49 @@
 const mongoose=require('mongoose');
+const member=require('./member')
 
-const eventSchema=mongoose.Schema({
-    nom:{
+const eventTaskSchema=mongoose.Schema({
+    
+    member:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'member',
+    },
+    task:{
         type:String
     },
-    date_heure:{
-        type:Date
+    event:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'event'
     },
-    details:{
+    createdAt:{
+        tpye:String
+    },
+    updatedAt:{
         type:String
     }
 })
 
+const eventSchema=mongoose.Schema({
+    name:{
+        type:String
+    },
+    dateTime:{
+        type:String
+    },
+    details:{
+        type:String
+    },
+    tasks:[{
+        type:eventTaskSchema
+    }],
+    createdAt:{
+        type:String
+    },
+    updatedAt:{
+        type:String
+    }
+
+})
+
 module.export=mongoose.model('event',eventSchema)
+module.exports=mongoose.model('eventTask',eventTaskSchema)
 

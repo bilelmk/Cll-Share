@@ -1,17 +1,23 @@
 const mongoose=require('mongoose');
 const messageSchema=require('./message')
 const messangerSchema=mongoose.Schema({
-    first_interloctor:{
+    firstInterlocutor:{
         type:mongoose.Schema.Types.ObjectId,
         ref:'member'
     },
-    second_interloctor:{
+    secondInterlocutor:{
         type:mongoose.Schema.Types.ObjectId,
         ref:'member'
     },
     messages:[{
         type:messageSchema,
-    }]
+    }],
+    createdAt:{
+        type:String
+    },
+    updatedAt:{
+        type:String
+    }
 
 })
 

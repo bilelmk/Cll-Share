@@ -1,35 +1,45 @@
 const mongoose = require('mongoose');
-const Post=require('./poste');
+const fileSchema=require('./file')
+const Post=require('./post');
+const eventTask=require('./event');
+const channel=require('./channel');
+const messenger=require('./messanger');
+const workshop=require('./workshop')
 const optionSchema = mongoose.Schema({
-    notif_atelier:{
-        type: String, 
+    NotifyWorkshops:{
+        type: Boolean,
     },
-    notif_event:{
-        type:String
+    NotifyEvents:{
+        type:Boolean
     },
-    notif_reunion:{
-        type:String
+    NotifyMeetings:{
+        type:Boolean
     },
     langue:{
+        type:String,
+        enum:['ARABE','FRENCH','ENGLISH'],
+        default:'FRENCH',
+    },
+    createdAt:{
         type:String
     },
-    theme:{
+    updatedAt:{
         type:String
     }
 });
 
 const memberSchema = mongoose.Schema({
-    nom:{
+    firstName:{
         type: String, 
     },
-    prenom:{
+    lastName:{
         type: String, 
     },
-    photo:{
-        type: Buffer, 
-    },
-    date_naissance:{
-        type: Date, 
+    photo:[{
+        type: fileSchema, 
+    }],
+    birthDate:{
+        type: String, 
     },
     mail:{
         type: String, 
@@ -39,18 +49,50 @@ const memberSchema = mongoose.Schema({
         type: String, 
         required:true
     },
-    adresse:{
+    adress:{
         type: String, 
     },
     active:{
-        type: Boolean,
-        required:true 
+        type: String,
+        required:true ,
+        enum:['ONLINE','OFFLINE'],
+        default:'OFFLINE'
     },
-    description:{
+    otherInfo:{
         type: String, 
     },
+    role:{
+        type:String,
+        enum:['ADMIN','SIMPLE_USER'],
+        default:'SIMPLE_USER'
+    },
     option : {type: optionSchema},
-    
+    posts:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'post'
+    },
+    tasks:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'eventTask',
+    },
+    channels:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'channel'
+    },
+    messengers:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'messanger'
+    },
+    workshopsPresentedByUser:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'workshop'
+    }],
+    createdAt:{
+        type:String
+    },
+    updatedAt:{
+        type:String
+    }
 });
 
 module.exports = mongoose.model('member', memberSchema);
