@@ -1,12 +1,13 @@
-const mongoose=require('mongoose');
-const messageSchema=require('./message')
-const messangerSchema=mongoose.Schema({
+import {Schema, model} from 'mongoose'
+import * as messageSchema from './message'
+import * as member from './member'
+const messangerSchema=Schema({
     firstInterlocutor:{
-        type:mongoose.Schema.Types.ObjectId,
+        type:Schema.Types.ObjectId,
         ref:'member'
     },
     secondInterlocutor:{
-        type:mongoose.Schema.Types.ObjectId,
+        type:Schema.Types.ObjectId,
         ref:'member'
     },
     messages:[{
@@ -21,4 +22,4 @@ const messangerSchema=mongoose.Schema({
 
 })
 
-module.exports=mongoose.model('messanger',messangerSchema)
+export default model('messanger',messageSchema)

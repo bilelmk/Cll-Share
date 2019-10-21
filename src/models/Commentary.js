@@ -1,6 +1,6 @@
-const mongoose=require('mongoose')
-const member=require('./member')
-const CommentarySchema=mongoose.Schema({
+import {Schema, model} from 'mongoose'
+
+const CommentarySchema=Schema({
     content:{
         type:String
     },
@@ -11,4 +11,4 @@ const CommentarySchema=mongoose.Schema({
         type:String
     }
 })
- module.exports=mongoose.model('Commentary',CommentarySchema)
+export default model('commentary',CommentarySchema)

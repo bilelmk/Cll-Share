@@ -1,7 +1,7 @@
-const mongoose = require('mongoose');
-const commentary=require('./Commentary');
-const fileSchema=require('./file')
-const postSchema = mongoose.Schema({
+import {Schema, model} from 'mongoose'
+import * as commentary from './Commentary'
+import * as fileSchema from './file'
+const postSchema = Schema({
     content:{
         type:String
     },
@@ -12,7 +12,7 @@ const postSchema = mongoose.Schema({
         type:fileSchema
     }],
     comments:{
-        type:mongoose.Schema.Types.ObjectId,
+        type:Schema.Types.ObjectId,
         ref:'commentary'
     },
     createdAt:{
@@ -23,4 +23,4 @@ const postSchema = mongoose.Schema({
     }
 })
 
-module.exports=mongoose.model('post',postSchema)
+export default model('post',postSchema)

@@ -1,17 +1,18 @@
-const mongoose=require('mongoose');
-const member=require('./member')
+import {Schema, model} from 'mongoose'
+import * as member from './member'
 
-const eventTaskSchema=mongoose.Schema({
+
+const eventTaskSchema=Schema({
     
     member:{
-        type:mongoose.Schema.Types.ObjectId,
+        type:Schema.Types.ObjectId,
         ref:'member',
     },
     task:{
         type:String
     },
     event:{
-        type:mongoose.Schema.Types.ObjectId,
+        type:Schema.Types.ObjectId,
         ref:'event'
     },
     createdAt:{
@@ -22,7 +23,7 @@ const eventTaskSchema=mongoose.Schema({
     }
 })
 
-const eventSchema=mongoose.Schema({
+const eventSchema=Schema({
     name:{
         type:String
     },
@@ -44,6 +45,6 @@ const eventSchema=mongoose.Schema({
 
 })
 
-module.export=mongoose.model('event',eventSchema)
-module.exports=mongoose.model('eventTask',eventTaskSchema)
+export default model('event',eventSchema)
+export default model('eventTask',eventTaskSchema)
 

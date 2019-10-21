@@ -1,11 +1,11 @@
-const mongoose = require('mongoose');
-const fileSchema=require('./file')
-const Post=require('./post');
-const eventTask=require('./event');
-const channel=require('./channel');
-const messenger=require('./messanger');
-const workshop=require('./workshop')
-const optionSchema = mongoose.Schema({
+import {Schema, model} from 'mongoose'
+import * as fileSchema from './file'
+import * as post from './post'
+import * as eventTask from './event'
+import * as channel from './channel'
+import * as messanger from './messanger'
+import * as workshop from './workshop'
+const optionSchema = Schema({
     NotifyWorkshops:{
         type: Boolean,
     },
@@ -28,7 +28,7 @@ const optionSchema = mongoose.Schema({
     }
 });
 
-const memberSchema = mongoose.Schema({
+const memberSchema = Schema({
     firstName:{
         type: String, 
     },
@@ -68,23 +68,23 @@ const memberSchema = mongoose.Schema({
     },
     option : {type: optionSchema},
     posts:{
-        type:mongoose.Schema.Types.ObjectId,
+        type:Schema.Types.ObjectId,
         ref:'post'
     },
     tasks:{
-        type:mongoose.Schema.Types.ObjectId,
+        type:Schema.Types.ObjectId,
         ref:'eventTask',
     },
     channels:{
-        type:mongoose.Schema.Types.ObjectId,
+        type:Schema.Types.ObjectId,
         ref:'channel'
     },
     messengers:{
-        type:mongoose.Schema.Types.ObjectId,
+        type:Schema.Types.ObjectId,
         ref:'messanger'
     },
     workshopsPresentedByUser:[{
-        type:mongoose.Schema.Types.ObjectId,
+        type:Schema.Types.ObjectId,
         ref:'workshop'
     }],
     createdAt:{
@@ -95,5 +95,5 @@ const memberSchema = mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model('member', memberSchema);
-module.exports=mongoose.module('optin',optionSchema)
+export default model('member',memberSchema)
+export default model('option',optionSchema)

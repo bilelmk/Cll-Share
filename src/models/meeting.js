@@ -1,5 +1,5 @@
-const mongoose=require('mongoose');
-const meetingSchema=mongoose.Schema({
+import {Schema, model} from 'mongoose'
+const meetingSchema=Schema({
     dateTime:{
         type:String,
     },
@@ -22,4 +22,4 @@ const meetingSchema=mongoose.Schema({
 })
 
 
-module.export=mongoose.model('meeting',meetingSchema)
+export default model('meeting',meetingSchema)

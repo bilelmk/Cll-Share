@@ -1,6 +1,6 @@
-const mongoose=require('mongoose');
+import {Schema, model} from 'mongoose'
 
-const fileSchema=mongoose.Schema({
+const fileSchema=Schema({
     name:{
         type:String
     },
@@ -20,4 +20,4 @@ const fileSchema=mongoose.Schema({
 
 
 
-module.export=mongoose.model('file',fileSchema)
+export default model('file',fileSchema)

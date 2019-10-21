@@ -1,6 +1,7 @@
-const mongoose=require('mongoose');
+import {Schema, model} from 'mongoose'
+import * as member from './member'
 
-const workshopSchema=mongoose.Schema({
+const workshopSchema=Schema({
     name:{
         type:String
     },
@@ -14,7 +15,7 @@ const workshopSchema=mongoose.Schema({
         type:String
     },
     presenter:{
-        type:mongoose.Schema.Types.ObjectId,
+        type:Schema.Types.ObjectId,
         ref:'member'
     },
     createdAt:{
@@ -27,5 +28,5 @@ const workshopSchema=mongoose.Schema({
 
 
 
-module.export=mongoose.model('workshop',workshopSchema)
+export default model('workshop',workshopSchema)
 

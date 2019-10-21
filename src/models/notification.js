@@ -1,9 +1,9 @@
-const mongoose=require('mongoose');
+import {Schema, model} from 'mongoose'
 
-const notificationSchema=mongoose.Schema({
+const notificationSchema=Schema({
     contenu:{
         type:String
     },
 })
-module.exports=mongoose.model('notification',notificationSchema);
+export default model('notification',notificationSchema)
 

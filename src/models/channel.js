@@ -1,8 +1,8 @@
-const mongoose=require('mongoose');
-const member=require('./member')
-const post=require('./post')
+import {Schema, model} from 'mongoose'
+import * as member from './member'
+import * as post from './post'
 
-const channelSchema=mongoose.Schema({
+const channelSchema=Schema({
     name:{
         type:String
     },
@@ -13,11 +13,11 @@ const channelSchema=mongoose.Schema({
         type:String
     },
     master:{
-        type:mongoose.Schema.Types.ObjectId,
+        type:Schema.Types.ObjectId,
         ref:'member'
     },
     members:[{
-        type:mongoose.Schema.Types.ObjectId,
+        type:Schema.Types.ObjectId,
         ref:'member'
     }],
     createdAt:{
@@ -27,10 +27,10 @@ const channelSchema=mongoose.Schema({
         type:String
     },
     posts:[{
-        type:mongoose.Schema.Types.ObjectId,
+        type:Schema.Types.ObjectId,
         ref:'post'
     }]
 
     
 })
-module.exports=mongoose.model('channel',channelSchema)
+export default model('channel',channelSchema)

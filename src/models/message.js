@@ -1,8 +1,8 @@
-const mongoose=require('mongoose');
-const member=require('./member');
-const fileSchema=require('./file')
+import {Schema, model} from 'mongoose'
+import * as member from './member'
+import * as fileSchema from './file'
 
-export const messageSchema=mongoose.Schema({
+export const messageSchema=Schema({
     content:{
         type:String,
         required:true
@@ -14,7 +14,7 @@ export const messageSchema=mongoose.Schema({
         type:fileSchema
     }],
     author:{
-        type:mongoose.Schema.Types.ObjectId,
+        type:Schema.Types.ObjectId,
         ref:'member',
         required:true
     },
@@ -26,4 +26,4 @@ export const messageSchema=mongoose.Schema({
     }
 })
 
-module.exports=mongoose.model('message',messageSchema);
+export default model('message',messageSchema)
