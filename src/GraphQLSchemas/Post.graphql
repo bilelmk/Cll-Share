@@ -17,7 +17,7 @@ type Commentary{
 
 extend type Query{
     post(id: String!): Post!
-    posts(ChannelId: String, query: String, orderBy:OrderByOption, pagination: PaginationOptionInput): [Post!]!
+    posts(channelId: String, query: String, orderBy:OrderByOption, pagination: PaginationOptionInput): [Post!]!
 }
 extend type Mutation{
     addPostToChannel(channelId: String, channelName: String, data: CreatePostInput): Post!

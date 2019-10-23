@@ -22,7 +22,7 @@ extend type Subscription{
 extend type Mutation{
     createChannel(data: CreateChannelInput!): Channel!
     updateChannel(id: String,name: String ,data: UpdateChannelInput!): Channel!
-    deleteChannel(id: String, names: String): Channel!
+    deleteChannel(id: String, name: String): Channel!
 }
 
 input CreateChannelInput{
