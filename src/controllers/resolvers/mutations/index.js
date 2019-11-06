@@ -1,10 +1,10 @@
-import channel from './channel'
-import event from './event'
-import meeting from './meeting'
-import member from './member'
-import messenger from './messenger'
-import post from './post'
-import workshop from './workshop'
+import channel from './channel.mutation'
+import event from './event.mutation'
+import meeting from './meeting.mutation'
+import member from './member.mutation'
+import messenger from './messenger.mutation'
+import post from './post.mutation'
+import workshop from './workshop.mutation'
 
 const mutations = {
     ...channel,

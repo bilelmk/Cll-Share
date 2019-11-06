@@ -1,10 +1,10 @@
-import Channel from './channel'
-import Event from './event'
-import Meeting from './meeting'
-import Member from './member'
-import Messenger from './messenger'
-import Post from './post'
-import Workshop from './workshop'
+import Channel from './Channel'
+import Event from './Event'
+import Meeting from './Meeting'
+import Member from './Member'
+import Messenger from './Messenger'
+import Post from './Post'
+import Workshop from './Workshop'
 
 const types = {
     Channel,
