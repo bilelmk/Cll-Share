@@ -1,5 +1,5 @@
-import {authGuard} from '../../sevices/authentication'
-import * as service from '../../sevices/channel'
+import {authGuard} from '../../services/authentication.service'
+import * as service from '../../services/channel.service'
 const mutations = {
     async createChannel(parent, args, cnxt, info){
         authGuard()

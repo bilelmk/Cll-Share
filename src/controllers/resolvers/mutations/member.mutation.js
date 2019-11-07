@@ -2,8 +2,8 @@ import {
     authGuard, 
     authneticatedUserShouldBeAdmin,
     updateAuthenticatedUser
-} from '../../sevices/authentication'
-import * as service from '../../sevices/member'
+} from '../../services/authentication.service'
+import * as service from '../../services/member.service'
 const mutations = {
     async signIn(parent, {data}, cnxt, info){
         service.signIn()

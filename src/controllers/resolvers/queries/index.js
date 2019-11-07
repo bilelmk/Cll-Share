@@ -1,10 +1,10 @@
-import channel from './channel'
-import event from './event'
-import meeting from './meeting'
-import member from './member'
-import messenger from './messenger'
-import post from './post'
-import workshop from './workshop'
+import channel from './channel.query'
+import event from './event.query'
+import meeting from './meeting.query'
+import member from './member.query'
+import messenger from './messenger.query'
+import post from './post.query'
+import workshop from './workshop.query'
 
 const queries = {
     ...channel,

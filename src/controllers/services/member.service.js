@@ -21,3 +21,17 @@ export const updateAuthenticatedMember = () => {
 export const deleteAuthenticatedMember = () => {
     throw new Error ('deleteMe not implemented yet')
 }
+
+export const getAuthenticatedMember = (header) => {
+    throw new Error ('getMe query not implemented yet')
+}
+
+export const getMember = (id) => {
+    throw new Error ('getMember query not implemented yet')
+}
+
+export const getMembers = (selectorSetting, paginationSetting) => {
+    const {query} = selectorSetting
+    const {orderBy, pagination} = paginationSetting
+    throw new Error ('getMembers query not implemented yet')
+}

@@ -1,12 +1,13 @@
-import {authGuard} from '../../sevices/authentification/authentication'
+import {authGuard} from '../../services/authentication.service'
+import {getPost, getPosts} from '../../services/post.service'
 const queries = {
     async posts (parent, {channelId, query, orderBy, pagination}, cnxt, info){
         authGuard()
-        throw new Error ('query not implemented yet')
+        getPosts({query, channelId}, {orderBy, pagination})
     },
     async post (parent, {id}, cnxt, info){
         authGuard()
-        throw new Error ('query not implemented yet')
+        getPost(id)
     }
 }
 export default queries

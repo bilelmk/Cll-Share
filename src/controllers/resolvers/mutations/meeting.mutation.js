@@ -1,5 +1,5 @@
-import {authGuard, authneticatedUserShouldBeAdmin} from '../../sevices/authentication'
-import * as service from '../../sevices/meeting'
+import {authGuard, authneticatedUserShouldBeAdmin} from '../../services/authentication.service'
+import * as service from '../../services/meeting.service'
 const mutations = {
     async createMeeting(parent, {data}, cnxt, info){
         authGuard()

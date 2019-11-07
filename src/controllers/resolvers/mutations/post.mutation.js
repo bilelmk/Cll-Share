@@ -1,4 +1,4 @@
-import {authGuard} from '../../sevices/authentication'
+import {authGuard} from '../../services/authentication.service'
 
 const mutations = {
     async addPostToChannel(parent, {channelId, channelName, data}, cnxt, info){

@@ -1,5 +1,5 @@
-import {authGuard} from '../../sevices/authentication'
-import * as service from '../../sevices/messenger'
+import {authGuard} from '../../services/authentication.service'
+import * as service from '../../services/messenger.service'
 const mutations = {
     async createMessenger(parent, {otherInterlocutorId}, cnxt, info){
         authGuard()

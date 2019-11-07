@@ -1,12 +1,13 @@
-import {authGuard} from '../../sevices/authentication.service'
+import {authGuard} from '../../services/authentication.service'
+import {getEvent, getEvents} from '../../services/event.service'
 const queries = {
     async events (parent, {query, orderBy, pagination}, cnxt, info){
         authGuard()
-        throw new Error ('query not implemented yet')
+        getEvents({query}, {pagination, orderBy})
     },
     async event (parent, {id}, cnxt, info){
         authGuard()
-        throw new Error ('query not implemented yet')
+        getEvent(id)
     }
 }
 export default queries

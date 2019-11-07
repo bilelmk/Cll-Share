@@ -1,12 +1,13 @@
-import {authGuard} from '../../sevices/authentification/authentication'
+import {authGuard} from '../../services/authentication.service'
+import {getChannel, getChannels} from '../../services/channel.service'
 const queries = {
     async channels (parent, {memberId, query, orderBy, pagination}, cnxt, info){
         authGuard()
-        throw new Error ('query not implemented yet')
+        getChannels({memberId, query}, {orderBy, pagination})
     },
     async channel (parent, {name, id}, cnxt, info){
         authGuard()
-        throw new Error ('query not implemented yet')
+        getChannel(id, name)
     }
 }
 export default queries

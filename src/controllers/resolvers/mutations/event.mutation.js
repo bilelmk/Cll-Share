@@ -1,5 +1,5 @@
-import {authGuard, authneticatedUserShouldBeAdmin} from '../../sevices/authentication'
-import * as service from '../../sevices/event'
+import {authGuard, authneticatedUserShouldBeAdmin} from '../../services/authentication.service'
+import * as service from '../../services/event.service'
 const mutations = {
     async createEvent(parent, {data}, cnxt, info){
         authGuard()
@@ -7,7 +7,7 @@ const mutations = {
         service.createEvent(data)
     },
     async updateEvent(parent, {id, data}, cnxt, info){
-        authGuard()
+        authGuard() 
         authneticatedUserShouldBeAdmin()
         service.updateEvent(id, data)
     },

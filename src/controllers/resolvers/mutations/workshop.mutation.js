@@ -1,4 +1,4 @@
-import {authGuard, authneticatedUserShouldBeAdmin} from '../../sevices/authentication'
+import {authGuard, authneticatedUserShouldBeAdmin} from '../../services/authentication.service'
 const mutations = {
     async createWorkshop(parent, {}, cnxt, info){
         authGuard()
