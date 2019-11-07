@@ -13,12 +13,14 @@ const messangerSchema=Schema({
     messages:[{
         type:messageSchema,
     }],
-    createdAt:{
-        type:String
+    createdAt: {
+        type: Date,
+        default:  new Date()
     },
-    updatedAt:{
-        type:String
-    }
+    updatedAt: {
+        type: Date,
+        default:  new Date()
+    },
 
 })
 

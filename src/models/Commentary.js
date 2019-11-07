@@ -5,10 +5,12 @@ const CommentarySchema=Schema({
         type:String
     },
     createdAt:{
-        type:String
+        type:Date,
+        default: new Date()
     },
     updatedAt:{
-        type:String
-    }
+        type:Date,
+        default: new Date()
+    },
 })
 export default model('commentary',CommentarySchema)

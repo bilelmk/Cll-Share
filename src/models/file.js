@@ -11,13 +11,16 @@ const fileSchema=Schema({
         type:String
     },
     createdAt:{
-        type:String
+        type:Date,
+        default: new Date()
     },
     updatedAt:{
-        type:String
-    }
+        type:Date,
+        default: new Date()
+    },
 })
 
+const fileModel = model('file',fileSchema)
 
 
-export default model('file',fileSchema)
+export {fileModel as default, fileSchema}

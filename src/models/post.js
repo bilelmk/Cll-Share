@@ -1,6 +1,5 @@
 import {Schema, model} from 'mongoose'
-import * as commentary from './Commentary'
-import * as fileSchema from './file'
+import {fileSchema} from './file'
 const postSchema = Schema({
     content:{
         type:String
@@ -16,11 +15,13 @@ const postSchema = Schema({
         ref:'commentary'
     },
     createdAt:{
-        type:String
+        type:Date,
+        default: new Date()
     },
     updatedAt:{
-        type:String
-    }
+        type:Date,
+        default: new Date()
+    },
 })
 
 export default model('post',postSchema)

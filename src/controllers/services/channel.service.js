@@ -1,5 +1,18 @@
-export const createChannel = (data) => {
-    throw new Error ('createChannel not implemented yet')
+import model from '../../models/channel'
+import {getAthenticatedUser} from './authentication.service'
+
+export const createChannel = async (data) => {
+    const {name, description, subject, membersIds} = data
+
+    const newChannel = new model({
+        name,
+        subject,
+        description,
+        members: membersIds,
+        master: getAthenticatedUser().id
+    })
+    const result = await newChannel.save()
+    return result
 }
 export const updateChannel = (id, name, data) => {
     throw new Error ('updateChannel not implemented yet')

@@ -3,27 +3,29 @@ import * as member from './member'
 
 const workshopSchema=Schema({
     name:{
-        type:String
+        type: String
     },
     dateTime:{
-        type:String
+        type: Date
     },
     subject:{
-        type:String
+        type: String
     },
     details:{
-        type:String
+        type: String
     },
     presenter:{
-        type:Schema.Types.ObjectId,
-        ref:'member'
+        type: Schema.Types.ObjectId,
+        ref: 'member'
     },
     createdAt:{
-        type:String
+        type: Date,
+        default: new Date()
     },
     updatedAt:{
-        type:String
-    }
+        type: Date,
+        default: new Date()
+    },
 })
 
 

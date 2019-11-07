@@ -18,12 +18,14 @@ export const messageSchema=Schema({
         ref:'member',
         required:true
     },
-    createdAt:{
-        type:String
+    createdAt: {
+        type: Date,
+        default:  new Date()
     },
-    updatedAt:{
-        type:String
-    }
+    updatedAt: {
+        type: Date,
+        default:  new Date()
+    },
 })
 
 export default model('message',messageSchema)

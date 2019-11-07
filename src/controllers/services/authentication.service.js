@@ -1,7 +1,7 @@
 export const authGuard = (authParamsLikeJWT) => {
     //not implimented yet
     const userIsAuthenticated = false
-    //raise error if not authenticated
+    console.log("checking user is authenticated")
     return userIsAuthenticated
 }
 export const authneticatedUserIsAdmin = (params) => {
@@ -18,7 +18,10 @@ export const authneticatedUserShouldBeAdmin = (params) => {
 }
 
 export const getAthenticatedUser = (requestHeader) => {
-    user = null
+    console.log ('about to getAthenticatedUser')
+    const user = {
+        id: null
+    }
     return user
 }
 
@@ -29,3 +32,4 @@ export const signIn = (data) => {
 export const signUp = (data) => {
     throw new Error ('signUn not implemented yet')
 }
+

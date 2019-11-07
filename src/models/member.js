@@ -1,10 +1,6 @@
 import {Schema, model} from 'mongoose'
-import * as fileSchema from './file'
-import * as post from './post'
-import * as eventTask from './event'
-import * as channel from './channel'
-import * as messanger from './messanger'
-import * as workshop from './workshop'
+import {fileSchema} from './file'
+
 const optionSchema = Schema({
     NotifyWorkshops:{
         type: Boolean,
@@ -20,12 +16,14 @@ const optionSchema = Schema({
         enum:['ARABE','FRENCH','ENGLISH'],
         default:'FRENCH',
     },
-    createdAt:{
-        type:String
+    createdAt: {
+        type: Date,
+        default:  new Date()
     },
-    updatedAt:{
-        type:String
-    }
+    updatedAt: {
+        type: Date,
+        default:  new Date()
+    },
 });
 
 const memberSchema = Schema({
@@ -42,8 +40,14 @@ const memberSchema = Schema({
         type: String, 
     },
     mail:{
-        type: String, 
-        required:true
+        lowercase:true,
+        trim:true,
+        required:true,
+        unique:true,
+        type:String,
+        validate:(value)=>{
+            return validator.isEmail(value);
+        }, 
     },
     password:{
         type: String, 
@@ -95,5 +99,6 @@ const memberSchema = Schema({
     }
 });
 
-export default model('member',memberSchema)
-export default model('option',optionSchema)
+const memberModel = model('member',memberSchema)
+const optionModel = model('option',optionSchema)
+export {memberModel as default, optionModel}
