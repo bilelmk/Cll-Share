@@ -11,7 +11,7 @@ const notificationSchema=Schema({
     updatedAt: {
         type: Date,
         default:  new Date()
-    },
+    }
 })
 export default model('notification',notificationSchema)
 

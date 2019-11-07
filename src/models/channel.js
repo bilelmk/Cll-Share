@@ -34,7 +34,7 @@ const channelSchema=Schema({
     updatedAt: {
         type: Date,
         default:  new Date()
-    },
+    }
 
     
 })

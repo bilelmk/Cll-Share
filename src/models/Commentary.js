@@ -11,6 +11,6 @@ const CommentarySchema=Schema({
     updatedAt:{
         type:Date,
         default: new Date()
-    },
+    }
 })
 export default model('commentary',CommentarySchema)

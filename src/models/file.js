@@ -17,7 +17,7 @@ const fileSchema=Schema({
     updatedAt:{
         type:Date,
         default: new Date()
-    },
+    }
 })
 
 const fileModel = model('file',fileSchema)

@@ -21,7 +21,7 @@ const postSchema = Schema({
     updatedAt:{
         type:Date,
         default: new Date()
-    },
+    }
 })
 
 export default model('post',postSchema)

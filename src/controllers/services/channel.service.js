@@ -11,8 +11,11 @@ export const createChannel = async (data) => {
         members: membersIds,
         master: getAthenticatedUser().id
     })
-    const result = await newChannel.save()
-    return result
+    try {
+        return await newChannel.save()
+    } catch (error) {
+        if (error.code === 11000) throw new Error (`name ${ name } already used`)
+    }
 }
 export const updateChannel = (id, name, data) => {
     throw new Error ('updateChannel not implemented yet')

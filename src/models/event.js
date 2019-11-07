@@ -22,7 +22,7 @@ const eventTaskSchema=Schema({
     updatedAt:{
         type:Date,
         default: new Date()
-    },
+    }
 })
 
 const eventSchema=Schema({

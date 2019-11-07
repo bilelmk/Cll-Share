@@ -19,7 +19,7 @@ const meetingSchema=Schema({
     updatedAt:{
         type:Date,
         default: new Date()
-    },
+    }
 
 })
 

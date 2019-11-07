@@ -20,7 +20,7 @@ const belongSchema = Schema({
     updatedAt: {
         type: Date,
         default:  new Date()
-    },
+    }
 })
 
 export default model('belong',belongSchema)

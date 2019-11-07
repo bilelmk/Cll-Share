@@ -25,7 +25,7 @@ const workshopSchema=Schema({
     updatedAt:{
         type: Date,
         default: new Date()
-    },
+    }
 })
 
 

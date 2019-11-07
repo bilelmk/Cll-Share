@@ -20,7 +20,7 @@ const messangerSchema=Schema({
     updatedAt: {
         type: Date,
         default:  new Date()
-    },
+    }
 
 })
 

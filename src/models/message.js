@@ -25,7 +25,7 @@ export const messageSchema=Schema({
     updatedAt: {
         type: Date,
         default:  new Date()
-    },
+    }
 })
 
 export default model('message',messageSchema)

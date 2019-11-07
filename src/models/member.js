@@ -23,7 +23,7 @@ const optionSchema = Schema({
     updatedAt: {
         type: Date,
         default:  new Date()
-    },
+    }
 });
 
 const memberSchema = Schema({
@@ -91,11 +91,13 @@ const memberSchema = Schema({
         type:Schema.Types.ObjectId,
         ref:'workshop'
     }],
-    createdAt:{
-        type:String
+    createdAt: {
+        type: Date,
+        default:  new Date()
     },
-    updatedAt:{
-        type:String
+    updatedAt: {
+        type: Date,
+        default:  new Date()
     }
 });
 
