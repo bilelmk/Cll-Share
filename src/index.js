@@ -3,6 +3,7 @@ import typeDefs from './schema'
 import resolvers from './controllers/resolvers/index'
 import {json} from 'express'
 import {urlencoded} from 'body-parser'
+import {} from './mongoDB'
 const PORT = 4000
 
 const pubsub = new PubSub();
@@ -10,8 +11,11 @@ const pubsub = new PubSub();
 const server = new GraphQLServer({
     typeDefs,
     resolvers,
-    context: {
-        pubsub
+    context(request) {
+        return {
+            pubsub,
+            request
+        }
     }
 })
 

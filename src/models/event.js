@@ -16,7 +16,7 @@ const eventTaskSchema=Schema({
         ref:'event'
     },
     createdAt:{
-        tpye:Date
+        type:Date
     },
     updatedAt:{
         type:Date

@@ -1,5 +1,21 @@
-export const createMember = (data) => {
-    throw new Error ('createMember not implemented yet')
+import model,{optionModel} from '../../models/member'
+import * as hashingUtils from './utils/hashing.utils'
+import * as errors from '../services/utils/errors'
+export const createMember = async (data) => {
+    let newMember = new model(
+        {
+            ...data,
+            password: await hashingUtils.default(data.password),
+            option: new optionModel(data.option)
+        }
+    )
+    console.log('[creating Member]: ', newMember)
+    try {
+        const result = await newMember.save()
+        return result
+    } catch (error) {
+        throw error
+    }
 }
 
 export const updateMember = (id, data) => {
@@ -26,12 +42,22 @@ export const getAuthenticatedMember = (header) => {
     throw new Error ('getMe query not implemented yet')
 }
 
-export const getMember = (id) => {
-    throw new Error ('getMember query not implemented yet')
+export const getMemberById = async (id) => {
+    console.log('[getMember ID]',id)
+    const member = await model.findOne({_id: id})
+    console.log(member)
+    if(! member) throw errors.MEMBER_ID_NOT_FOUND
+    return member
 }
 
 export const getMembers = (selectorSetting, paginationSetting) => {
     const {query} = selectorSetting
     const {orderBy, pagination} = paginationSetting
     throw new Error ('getMembers query not implemented yet')
+}
+export const getMemberByEmailAndPassword = async (mail, password) => {
+    const member = await model.findOne({mail})
+    if ( !member ) throw errors.INVALID_EMAIL_OR_PASSWORD_ERROR
+    if ( !await hashingUtils.checkPassword(password, member.password)) throw errors.INVALID_EMAIL_OR_PASSWORD_ERROR
+    return member
 }

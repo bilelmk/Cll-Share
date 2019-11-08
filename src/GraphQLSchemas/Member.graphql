@@ -58,14 +58,17 @@ extend type Subscription{
 }
 
 extend type Mutation{
-    signIn(data: SignInInput!): Member!
-    signUp(data: SignUpInput!): Member!
+    signIn(data: SignInInput!): AuthPayload!
+    signUp(data: SignUpInput!): AuthPayload!
     updateMe(data: UpdateMemberInput!): Member!
     changeMemberRole(id: String!, role: MemberRole!): Member
     deleteMe: Member!
     deleteMember(id: String!): Member!
 }
-
+type AuthPayload {
+    token: String!
+    member: Member! 
+}
 input SignInInput{
     email: String!
     password: String!

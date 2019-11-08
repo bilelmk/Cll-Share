@@ -1,15 +1,11 @@
-import {
-    authGuard, 
-    authneticatedUserShouldBeAdmin,
-    updateAuthenticatedUser
-} from '../../services/authentication.service'
+import * as authenticationService from '../../services/authentication.service'
 import * as service from '../../services/member.service'
 const mutations = {
     async signIn(parent, {data}, cnxt, info){
-        service.signIn()
+        return await authenticationService.signIn(data)
     },
     async signUp(parent, {data}, cnxt, info){
-        service.signUp()
+        return await authenticationService.signUp(data)
     },
     async updateMe(parent, {data}, cnxt, info){
         authGuard()

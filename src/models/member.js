@@ -1,4 +1,5 @@
 import {Schema, model} from 'mongoose'
+import validator from 'validator'
 import {fileSchema} from './file'
 
 const optionSchema = Schema({
@@ -43,7 +44,7 @@ const memberSchema = Schema({
         required:true,
         unique:true,
         type:String,
-        validate:(value)=>{
+        validate: (value)=>{
             return validator.isEmail(value);
         }, 
     },

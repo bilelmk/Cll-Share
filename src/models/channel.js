@@ -28,10 +28,6 @@ const channelSchema=Schema({
     },
     updatedAt:{
         type:Date
-    },
-    updatedAt: {
-        type: Date,
-        default:  new Date()
     }
 
     
