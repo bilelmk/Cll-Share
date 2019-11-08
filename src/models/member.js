@@ -21,10 +21,10 @@ const optionSchema = Schema({
         default:'FRENCH',
     },
     createdAt:{
-        type:String
+        type:Date
     },
     updatedAt:{
-        type:String
+        type:Date
     }
 });
 
@@ -39,7 +39,7 @@ const memberSchema = Schema({
         type: fileSchema, 
     }],
     birthDate:{
-        type: String, 
+        type: Date, 
     },
     mail:{
         type: String, 
@@ -88,10 +88,10 @@ const memberSchema = Schema({
         ref:'workshop'
     }],
     createdAt:{
-        type:String
+        type:Date
     },
     updatedAt:{
-        type:String
+        type:Date
     }
 });
 

@@ -1,7 +1,7 @@
 import {Schema, model} from 'mongoose'
 const meetingSchema=Schema({
     dateTime:{
-        type:String,
+        type:Date,
     },
     details:{
         type:String
@@ -13,10 +13,10 @@ const meetingSchema=Schema({
         type:String
     }],
     createdAt:{
-        type:String
+        type:Date
     },
     updatedAt:{
-        type:String
+        type:Date
     }
 
 })

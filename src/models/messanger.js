@@ -14,10 +14,10 @@ const messangerSchema=Schema({
         type:messageSchema,
     }],
     createdAt:{
-        type:String
+        type:Date
     },
     updatedAt:{
-        type:String
+        type:Date
     }
 
 })

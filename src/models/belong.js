@@ -3,7 +3,7 @@ import {Schema, model} from 'mongoose'
 
 const belongSchema = Schema({
    date:{
-        type:String
+        type:Date
     },
     member:{
         type:Schema.Types.ObjectId,

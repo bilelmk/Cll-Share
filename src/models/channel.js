@@ -21,10 +21,10 @@ const channelSchema=Schema({
         ref:'member'
     }],
     createdAt:{
-        type:String
+        type:Date
     },
     updatedAt:{
-        type:String
+        type:Date
     },
     posts:[{
         type:Schema.Types.ObjectId,

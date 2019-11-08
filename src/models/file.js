@@ -11,10 +11,10 @@ const fileSchema=Schema({
         type:String
     },
     createdAt:{
-        type:String
+        type:Date
     },
     updatedAt:{
-        type:String
+        type:Date
     }
 })
 

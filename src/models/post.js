@@ -16,10 +16,10 @@ const postSchema = Schema({
         ref:'commentary'
     },
     createdAt:{
-        type:String
+        type:Date
     },
     updatedAt:{
-        type:String
+        type:Date
     }
 })
 

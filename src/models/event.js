@@ -16,10 +16,10 @@ const eventTaskSchema=Schema({
         ref:'event'
     },
     createdAt:{
-        tpye:String
+        tpye:Date
     },
     updatedAt:{
-        type:String
+        type:Date
     }
 })
 
@@ -28,7 +28,7 @@ const eventSchema=Schema({
         type:String
     },
     dateTime:{
-        type:String
+        type:Date
     },
     details:{
         type:String
@@ -37,10 +37,10 @@ const eventSchema=Schema({
         type:eventTaskSchema
     }],
     createdAt:{
-        type:String
+        type:Date
     },
     updatedAt:{
-        type:String
+        type:Date
     }
 
 })

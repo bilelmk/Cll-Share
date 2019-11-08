@@ -6,7 +6,7 @@ const workshopSchema=Schema({
         type:String
     },
     dateTime:{
-        type:String
+        type:Date
     },
     subject:{
         type:String
@@ -19,10 +19,10 @@ const workshopSchema=Schema({
         ref:'member'
     },
     createdAt:{
-        type:String
+        type:Date
     },
     updatedAt:{
-        type:String
+        type:Date
     }
 })
 
