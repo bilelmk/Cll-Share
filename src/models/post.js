@@ -1,6 +1,5 @@
 import {Schema, model} from 'mongoose'
-import * as commentary from './Commentary'
-import * as fileSchema from './file'
+import {fileSchema} from './file'
 const postSchema = Schema({
     content:{
         type:String

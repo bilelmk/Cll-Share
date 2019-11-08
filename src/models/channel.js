@@ -3,22 +3,25 @@ import * as member from './member'
 import * as post from './post'
 
 const channelSchema=Schema({
-    name:{
-        type:String
+    name: {
+        type: String,
+        trim: true,
+        required: true,
+        unique: true,
     },
-    description:{
-        type:String
+    description: {
+        type: String
     },
-    subject:{
-        type:String
+    subject: {
+        type: String
     },
-    master:{
-        type:Schema.Types.ObjectId,
-        ref:'member'
+    master: {
+        type: Schema.Types.ObjectId,
+        ref: 'member'
     },
-    members:[{
-        type:Schema.Types.ObjectId,
-        ref:'member'
+    members: [{
+        type: Schema.Types.ObjectId,
+        ref: 'member'
     }],
     createdAt:{
         type:Date
@@ -26,11 +29,11 @@ const channelSchema=Schema({
     updatedAt:{
         type:Date
     },
-    posts:[{
-        type:Schema.Types.ObjectId,
-        ref:'post'
-    }]
+    updatedAt: {
+        type: Date,
+        default:  new Date()
+    }
 
     
 })
-export default model('channel',channelSchema)
+export default model('channel', channelSchema)

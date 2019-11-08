@@ -49,7 +49,10 @@ export const authneticatedUserShouldBeAdmin = (params) => {
 }
 
 export const getAthenticatedUser = (requestHeader) => {
-    user = null
+    console.log ('about to getAthenticatedUser')
+    const user = {
+        id: null
+    }
     return user
 }
 
@@ -97,3 +100,4 @@ export const signIn = (req,res,next) => {
 export const signUp = (data) => {
     throw new Error ('signUn not implemented yet')
 }
+

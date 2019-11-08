@@ -18,6 +18,7 @@ const fileSchema=Schema({
     }
 })
 
+const fileModel = model('file',fileSchema)
 
 
-export default model('file',fileSchema)
+export {fileModel as default, fileSchema}

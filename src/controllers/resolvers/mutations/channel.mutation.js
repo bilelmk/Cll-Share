@@ -4,7 +4,7 @@ const mutations = {
     async createChannel(parent, args, cnxt, info){
         authGuard()
         const {data} = args
-        service.createChannel(data)
+        return await service.createChannel(data)
     },
     async updateChannel(parent, {id, name, data}, cnxt, info ){
         authGuard()
