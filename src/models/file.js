@@ -10,11 +10,13 @@ const fileSchema=Schema({
     encoding:{
         type:String
     },
-    createdAt:{
-        type:Date
+    createdAt: {
+        type: Date,
+        default:  new Date()
     },
-    updatedAt:{
-        type:Date
+    updatedAt: {
+        type: Date,
+        default:  new Date()
     }
 })
 

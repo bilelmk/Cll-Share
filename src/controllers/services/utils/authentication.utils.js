@@ -6,7 +6,6 @@ export const extractTokenFromRequest = (request) => {
   let token = request.request ? request.request.headers.authorization : request.connection.context.Authorization 
   if (!token) throw errors.TOKEN_IS_MISSING_ERROR
   if (token.startsWith('Bearer ')) token = token.slice(7, token.length)
-  console.log("[TOKEN]: ",token)
   return token
 }
 

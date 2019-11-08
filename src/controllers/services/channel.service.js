@@ -1,35 +1,108 @@
 import model from '../../models/channel'
-import {getAthenticatedUser} from './authentication.service'
-
-export const createChannel = async (data) => {
-    const {name, description, subject, membersIds} = data
-
-    const newChannel = new model({
-        name,
-        subject,
-        description,
-        members: membersIds,
-        master: getAthenticatedUser().id
-    })
+import {removeDuplicates} from './utils/array.utils'
+import * as errors from './utils/errors'
+import channel from '../../models/channel'
+const tryToSaveChannel = async (channel) => {
+    makeMasterBelongsToChannelMembers(channel)
+    channel.members = removeDuplicates(channel.members)
     try {
-        return await newChannel.save()
+        return await channel.save()
     } catch (error) {
-        if (error.code === 11000) throw new Error (`name ${ name } already used`)
+        if (error.code === 11000) throw new Error (`name ${ channel.name } already used`)
     }
 }
-export const updateChannel = (id, name, data) => {
-    throw new Error ('updateChannel not implemented yet')
+
+const makeMasterBelongsToChannelMembers = (channel) => {
+    if(!channel.members){
+        channel.members = [channel.master]
+    }
+    channel.members = checkMemberBelongsToChannel(channel.master, channel)
+                        ? channel.members : 
+                        channel.members.push(channel.master)
+}
+
+export const createChannel = async (data) => {
+    const newChannel = new model(data)
+    return await tryToSaveChannel(newChannel)
+}
+
+
+export const checkMemberIsChannelMaster = (member, channel) => {
+    if (member.id == channel.master) return true
+    throw errors.ACCESS_DENIED
+}
+
+export const checkMemberBelongsToChannel = (memberId, channel) => {
+    const memberIds = channel.members.map((id)=> id.toString())
+    if (!memberIds.includes(memberId.toString())) return false
+    return true
+} 
+
+export const checkMemberMustBelongToChannel = (memberId, channel)=>{
+    const result = checkMemberBelongsToChannel(memberId, channel)
+    if(!result) throw errors.MEMBER_MUST_BELONGS_TO_CHANNEL
+    return result
+}
+
+const manipulateMembers = (members, memberManipulation)=> {
+    const {action, membersIds} =memberManipulation
+    members = members.map(id => id.toString())
+    const membersToManipulateIds = membersIds
+    if (action == "ADD") {
+        members.push(...membersToManipulateIds)
+    }else if (action == "REMOVE"){
+        members = members.filter((id)=> {
+            return !membersToManipulateIds.includes(id.toString())
+        })
+    }
+    return members
+}
+
+export const updateChannel = async (channel, updateData) => {
+    if (updateData.memberManipulation){
+        channel.members = manipulateMembers(channel.members, updateData.memberManipulation)
+    }
+    if (updateData.masterId ){
+        checkMemberMustBelongToChannel(updateData.masterId, channel)
+        channel.master = updateData.masterId
+    }
+    Object.keys(updateData).forEach((key)=>{
+        if (channel[key]){
+            channel[key] = updateData[key]
+        } 
+    })
+    return await tryToSaveChannel(channel)
+
 }
 export const deleteChannel = (id, names) => {
     throw new Error ('deleteChannel not implemented yet')
 }
 
-export const getChannel = (id, name) => {
-    throw new Error ('getChannel query not implemented yet')
+export const getChannel = async (id, name) => {
+    let filter = {}
+    if (id){
+        filter = {
+            _id: id
+        }
+    }else if (name){
+        filter = {
+            name
+        }
+    }else {
+        throw errors.SELECTION_OPTIONS_MISSING
+    }
+    try {
+        const result = await model.findOne(filter)
+        if (result) return result
+        throw new Error()
+    } catch (error) {
+        throw errors.UNVALID_SELECTION_OPTIONS
+    }
+    
 }
 
 export const getChannels = (selectorSetting, paginationSetting) => {
     const {memberId, query} = selectorSetting
     const {orderBy, pagination} = paginationSetting
-    throw new Error ('getChannels query not implemented yet')
+
 }

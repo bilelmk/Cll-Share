@@ -3,10 +3,15 @@ import * as errors from './utils/errors'
 import * as memberService from './member.service'
 
 export const authGuard = async (req) => {
-  const token =  authenticationUtils.extractTokenFromRequest(req)
-  const tokenData = await authenticationUtils.getDataFromToken(token)
+  const tokenData = await extractDataFromRequest(req)
   const authenticatedMember = await memberService.getMemberById(tokenData.id)
   return authenticatedMember
+}
+
+export const extractDataFromRequest= async (req) => {
+  const token =  authenticationUtils.extractTokenFromRequest(req)
+  const tokenData = await authenticationUtils.getDataFromToken(token)
+  return tokenData
 }
 
 export const signIn = async ({email, password}) => {
@@ -16,7 +21,7 @@ export const signIn = async ({email, password}) => {
 }
 
 export const signUp = async (data) => {
-  const member = await memberService.createAMember(data)
+  const member = await memberService.createMember(data)
   return authenticationUtils.createAuthPlayloadFromMember(member)
 }
 
@@ -33,13 +38,6 @@ export const authneticatedUserShouldBeAdmin = (params) => {
     return isAdmin
 }
 
-export const getAthenticatedUser = (requestHeader) => {
-    console.log ('about to getAthenticatedUser')
-    const user = {
-        id: null
-    }
-    return user
-}
 
 
 

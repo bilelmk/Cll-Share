@@ -23,11 +23,17 @@ const channelSchema=Schema({
         type: Schema.Types.ObjectId,
         ref: 'member'
     }],
+    posts: [{
+        type: Schema.Types.ObjectId,
+        ref: 'post'
+    }],
     createdAt:{
-        type:Date
+        type:Date,
+        default: new Date()
     },
     updatedAt:{
-        type:Date
+        type:Date,
+        default: new Date()
     }
 
     

@@ -14,11 +14,13 @@ const postSchema = Schema({
         type:Schema.Types.ObjectId,
         ref:'commentary'
     },
-    createdAt:{
-        type:Date
+    createdAt: {
+        type: Date,
+        default:  new Date()
     },
-    updatedAt:{
-        type:Date
+    updatedAt: {
+        type: Date,
+        default:  new Date()
     }
 })
 

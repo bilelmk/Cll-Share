@@ -28,7 +28,6 @@ server.start({port: PORT}, () => {
     console.log(`The Server is Up on localhost:${PORT} ` )
 } )
 
-console.log('ahhi')
 
 
  

@@ -36,6 +36,7 @@ input UpdateChannelInput{
     name: String
     description: String
     subject: String
+    masterId: String
     memberManipulation: manipulateChannelMembersInput
 }
 

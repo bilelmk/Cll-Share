@@ -17,11 +17,13 @@ const optionSchema = Schema({
         enum:['ARABE','FRENCH','ENGLISH'],
         default:'FRENCH',
     },
-    createdAt:{
-        type:Date
+    createdAt: {
+        type: Date,
+        default:  new Date()
     },
-    updatedAt:{
-        type:Date
+    updatedAt: {
+        type: Date,
+        default:  new Date()
     }
 });
 
@@ -90,11 +92,13 @@ const memberSchema = Schema({
         type:Schema.Types.ObjectId,
         ref:'workshop'
     }],
-    createdAt:{
-        type:Date
+    createdAt: {
+        type: Date,
+        default:  new Date()
     },
-    updatedAt:{
-        type:Date
+    updatedAt: {
+        type: Date,
+        default:  new Date()
     }
 });
 

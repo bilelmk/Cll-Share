@@ -1,11 +1,10 @@
+import {getMemberById} from '../../services/member.service'
 const Channel = {
-    master(parent, args, cnxt, info){
-
-        
+    async master(parent, args, cnxt, info){
+        return await getMemberById(parent.master)
     },
-    members(parent, args, cnxt, info){
-
-        
+    async members(parent, args, cnxt, info){
+        return parent.members.map((id) => getMemberById(id))
     },
     posts(parent, args, cnxt, info){
 

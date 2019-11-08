@@ -18,11 +18,13 @@ const workshopSchema=Schema({
         type: Schema.Types.ObjectId,
         ref: 'member'
     },
-    createdAt:{
-        type:Date
+    createdAt: {
+        type: Date,
+        default:  new Date()
     },
-    updatedAt:{
-        type:Date
+    updatedAt: {
+        type: Date,
+        default:  new Date()
     }
 })
 

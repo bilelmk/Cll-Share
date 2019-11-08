@@ -1,7 +1,7 @@
 import {Schema, model} from 'mongoose'
 import * as messageSchema from './message'
 import * as member from './member'
-const messangerSchema=Schema({
+const messengerSchema=Schema({
     firstInterlocutor:{
         type:Schema.Types.ObjectId,
         ref:'member'
@@ -13,13 +13,15 @@ const messangerSchema=Schema({
     messages:[{
         type:messageSchema,
     }],
-    createdAt:{
-        type:Date
+    createdAt: {
+        type: Date,
+        default:  new Date()
     },
-    updatedAt:{
-        type:Date
+    updatedAt: {
+        type: Date,
+        default:  new Date()
     }
 
 })
 
-export default model('messanger',messageSchema)
+export default model('messenger', messengerSchema)

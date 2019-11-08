@@ -15,11 +15,13 @@ const eventTaskSchema=Schema({
         type:Schema.Types.ObjectId,
         ref:'event'
     },
-    createdAt:{
-        type:Date
+    createdAt: {
+        type: Date,
+        default:  new Date()
     },
-    updatedAt:{
-        type:Date
+    updatedAt: {
+        type: Date,
+        default:  new Date()
     }
 })
 
@@ -36,11 +38,13 @@ const eventSchema=Schema({
     tasks:[{
         type:eventTaskSchema
     }],
-    createdAt:{
-        type:Date
+    createdAt: {
+        type: Date,
+        default:  new Date()
     },
-    updatedAt:{
-        type:Date
+    updatedAt: {
+        type: Date,
+        default:  new Date()
     }
 
 })

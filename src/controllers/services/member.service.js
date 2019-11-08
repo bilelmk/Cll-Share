@@ -9,7 +9,6 @@ export const createMember = async (data) => {
             option: new optionModel(data.option)
         }
     )
-    console.log('[creating Member]: ', newMember)
     try {
         const result = await newMember.save()
         return result
@@ -43,9 +42,7 @@ export const getAuthenticatedMember = (header) => {
 }
 
 export const getMemberById = async (id) => {
-    console.log('[getMember ID]',id)
     const member = await model.findOne({_id: id})
-    console.log(member)
     if(! member) throw errors.MEMBER_ID_NOT_FOUND
     return member
 }
