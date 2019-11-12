@@ -1,7 +1,7 @@
 import model from '../../models/channel'
 import {removeDuplicates} from './utils/array.utils'
 import * as errors from './utils/errors'
-import channel from '../../models/channel'
+
 const tryToSaveChannel = async (channel) => {
     makeMasterBelongsToChannelMembers(channel)
     channel.members = removeDuplicates(channel.members)
@@ -74,6 +74,7 @@ export const updateChannel = async (channel, updateData) => {
     return await tryToSaveChannel(channel)
 
 }
+
 export const deleteChannel = (id, names) => {
     throw new Error ('deleteChannel not implemented yet')
 }
