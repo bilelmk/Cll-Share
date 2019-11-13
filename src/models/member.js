@@ -34,9 +34,9 @@ const memberSchema = Schema({
     lastName:{
         type: String, 
     },
-    photo:[{
+    photo:{
         type: fileSchema, 
-    }],
+    },
     birthDate:{
         type: Date, 
     },

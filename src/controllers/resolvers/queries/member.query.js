@@ -1,5 +1,5 @@
 import {authGuard} from '../../services/authentication.service'
-import {getAuthenticatedMember, getMember, getMembers} from '../../services/member.service'
+import {getMember, getMembers} from '../../services/member.service'
 import * as service from '../../services/member.service'
 const queries = {
     async me (parent, {}, {request}, info){
@@ -8,8 +8,8 @@ const queries = {
     },
     async members (parent, {query, orderBy, pagination}, cnxt, info){
         authGuard()
-        getMembers({query}, {orderBy, pagination})
-        throw new Error ('query not implemented yet')
+        return await getMembers({query}, {orderBy, pagination})
+        
     },
     async member (parent, {id}, cnxt, info){
         authGuard()

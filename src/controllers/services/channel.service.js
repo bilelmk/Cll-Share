@@ -1,10 +1,20 @@
 import model from '../../models/channel'
 import {removeDuplicates} from './utils/array.utils'
 import * as errors from './utils/errors'
+import * as memberService from './member.service'
+import * as arrayUtils from './utils/array.utils'
+
+const checkChannelMembersExists = async ( membersIds)=>{
+    for (let id of membersIds){
+        await memberService.getMemberById(id)
+    }
+
+}
 
 const tryToSaveChannel = async (channel) => {
     makeMasterBelongsToChannelMembers(channel)
     channel.members = removeDuplicates(channel.members)
+    await checkChannelMembersExists(channel.members)
     try {
         return await channel.save()
     } catch (error) {
@@ -66,11 +76,7 @@ export const updateChannel = async (channel, updateData) => {
         checkMemberMustBelongToChannel(updateData.masterId, channel)
         channel.master = updateData.masterId
     }
-    Object.keys(updateData).forEach((key)=>{
-        if (channel[key]){
-            channel[key] = updateData[key]
-        } 
-    })
+    channel = arrayUtils.updateObject(channel, updateData)
     return await tryToSaveChannel(channel)
 
 }

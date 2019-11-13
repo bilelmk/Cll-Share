@@ -1,24 +1,58 @@
 import model,{optionModel} from '../../models/member'
 import * as hashingUtils from './utils/hashing.utils'
 import * as errors from '../services/utils/errors'
-export const createMember = async (data) => {
-    let newMember = new model(
-        {
-            ...data,
-            password: await hashingUtils.default(data.password),
-            option: new optionModel(data.option)
-        }
-    )
+import * as arrayUtils from '../services/utils/array.utils'
+import fileModel from '../../models/file'
+const tryToSaveMember = async(member)=>{
     try {
-        const result = await newMember.save()
+        const result = await member.save()
         return result
     } catch (error) {
         throw error
     }
 }
+export const createMember = async (data) => {
+    let docs = {
+        ...data,
+        password: await hashingUtils.default(data.password),
+        option: new optionModel(data.option),
+    }
+    if (data.photo){
+        docs = {
+            ...docs,
+            photo: new fileModel(data.photo)
+        }
+    }
+    const newMember = new model(docs)
+    console.log('\n\n\nhere\n\n\n')
+    return await tryToSaveMember(newMember)
+    
+}
 
-export const updateMember = (id, data) => {
-    throw new Error ('updateMember not implemented yet')
+
+export const updateMember = async (member, data) => {
+    let updatedOptions = null
+    if(data.option){
+        updatedOptions = arrayUtils.updateObject(member.option, data.option)
+    }
+    if(data.password){
+        data.password = await hashingUtils.default(data.password)
+    }
+    Object.keys(data).forEach((key)=>{
+        if (member[key]){
+            member[key] = data[key]
+        } 
+    })
+    if(updatedOptions){
+        console.log('\n\n\n[here]: \n\n\n')
+        console.log(updatedOptions)
+        member.option = new optionModel(updatedOptions)
+    }
+    if(data.photo){
+        member.photo = new fileModel(data.photo)
+    }
+    return await tryToSaveMember(member)
+
 }
 
 export const deleteMember = (id) => {
@@ -48,9 +82,7 @@ export const getMemberById = async (id) => {
 }
 
 export const getMembers = (selectorSetting, paginationSetting) => {
-    const {query} = selectorSetting
-    const {orderBy, pagination} = paginationSetting
-    throw new Error ('getMembers query not implemented yet')
+    return model.find()
 }
 export const getMemberByEmailAndPassword = async (mail, password) => {
     const member = await model.findOne({mail})

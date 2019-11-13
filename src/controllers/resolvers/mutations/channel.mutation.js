@@ -8,7 +8,7 @@ const mutations = {
         return await service.createChannel({
             ...data,
             master: authenticatedUser.id,
-            members: data.memberIds
+            members: data.membersIds
         })
     },
     async updateChannel(parent, {id, name, data}, {request}, info ){

@@ -7,9 +7,9 @@ const mutations = {
     async signUp(parent, {data}, cnxt, info){
         return await authenticationService.signUp(data)
     },
-    async updateMe(parent, {data}, cnxt, info){
-        authGuard()
-        updateAuthenticatedUser()
+    async updateMe(parent, {data}, {request}, info){
+        const member =  await authenticationService.authGuard(request)
+        return await service.updateMember(member, data)
     },
     async changeMemberRole(parent, {id, role}, cnxt, info){
         authGuard()

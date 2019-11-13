@@ -29,7 +29,7 @@ input CreateChannelInput{
     name: String!
     description: String!
     subject: String!
-    memberIds: [String!]
+    membersIds: [String!]
 }
 
 input UpdateChannelInput{
