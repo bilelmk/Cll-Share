@@ -12,3 +12,4 @@ export const FAILED_TO_SAVE_MESSENGER = createError (500, 'failed to save new me
 export const MESSENGER_ALREADY_EXISITS = createError (400, 'messenger already exists')
 export const AUTHENTICATED_MEMBER_IS_NOT_ADMIN = createError(401, 'authenticated member is not an admin')
 export const FAILED_TO_SAVE_EVENT = createError (500, 'failed to save new event')
+export const UNIQUE_CONSTRAINT_VIOLATION = (entity, key, value) => createError (400, `this ${key} of value ${value} for ${entity} is already taken`)

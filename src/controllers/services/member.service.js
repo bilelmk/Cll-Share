@@ -8,7 +8,10 @@ const tryToSaveMember = async(member)=>{
         const result = await member.save()
         return result
     } catch (error) {
-        throw error
+        if(error.code == 11000){
+            throw errors.UNIQUE_CONSTRAINT_VIOLATION('Member', 'mail', member.mail)
+        }
+        throw errors.UNIQUE_CONSTRAINT_VIOLATION('Member', 'mail', member.mail)
     }
 }
 export const createMember = async (data) => {
@@ -24,7 +27,6 @@ export const createMember = async (data) => {
         }
     }
     const newMember = new model(docs)
-    console.log('\n\n\nhere\n\n\n')
     return await tryToSaveMember(newMember)
     
 }
@@ -44,7 +46,6 @@ export const updateMember = async (member, data) => {
         } 
     })
     if(updatedOptions){
-        console.log('\n\n\n[here]: \n\n\n')
         console.log(updatedOptions)
         member.option = new optionModel(updatedOptions)
     }

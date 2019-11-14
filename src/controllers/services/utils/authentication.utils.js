@@ -1,6 +1,8 @@
-import { secret } from '../../../config'
+
 import * as jwt from 'jsonwebtoken'
 import * as errors from './errors'
+
+const secret = process.env.JWT_SECRET
 
 export const extractTokenFromRequest = (request) => {
   let token = request.request ? request.request.headers.authorization : request.connection.context.Authorization 
