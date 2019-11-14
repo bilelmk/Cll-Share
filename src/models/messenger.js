@@ -1,5 +1,5 @@
 import {Schema, model} from 'mongoose'
-import * as messageSchema from './message'
+import {messageSchema} from './message'
 import * as member from './member'
 const messengerSchema=Schema({
     firstInterlocutor:{

@@ -1,8 +1,7 @@
 import {Schema, model} from 'mongoose'
-import * as member from './member'
-import * as fileSchema from './file'
+import {fileSchema} from './file'
 
-export const messageSchema=Schema({
+const messageSchema=Schema({
     content:{
         type:String,
         required:true
@@ -28,4 +27,6 @@ export const messageSchema=Schema({
     }
 })
 
-export default model('message',messageSchema)
+const messengerModel = model('message',messageSchema)
+
+export {messengerModel as default, messageSchema}

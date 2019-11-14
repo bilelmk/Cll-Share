@@ -7,3 +7,6 @@ export const SELECTION_OPTIONS_MISSING = createError(400, 'selection options are
 export const UNVALID_SELECTION_OPTIONS = createError(400, 'selection options are unvalide')
 export const ACCESS_DENIED = createError(401, 'you don\'t have the permition to this action')
 export const MEMBER_MUST_BELONGS_TO_CHANNEL = createError(400, 'member must belong to channel')
+export const CHANNEL_ALREADY_EXISITS = createError (400, 'channel already exists')
+export const FAILED_TO_SAVE_MESSENGER = createError (500, 'failed to save new messenger')
+export const MESSENGER_ALREADY_EXISITS = createError (400, 'messenger already exists')
