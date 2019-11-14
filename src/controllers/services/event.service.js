@@ -1,5 +1,22 @@
-export const createEvent = (data) => {
-    throw new Error ('createEvent not implemented yet')
+import model from '../../models/event'
+import * as errors from './utils/errors'
+
+const tryTOSaveEvent = async (event) => {
+    try {
+        return await event.save()
+    } catch (error) {
+        console.log(error)
+        if(error.code == 11000){
+            throw new Error (`name ${event.name} is already used`)
+        }
+        throw errors.FAILED_TO_SAVE_EVENT
+        
+    }
+}
+
+export const createEvent = async (data) => {
+    const event = new model(data)
+    return await tryTOSaveEvent(event)
 }
 export const updateEvent = (id, data) => {
     throw new Error ('updateEvent not implemented yet')

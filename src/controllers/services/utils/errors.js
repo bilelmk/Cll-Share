@@ -10,3 +10,5 @@ export const MEMBER_MUST_BELONGS_TO_CHANNEL = createError(400, 'member must belo
 export const CHANNEL_ALREADY_EXISITS = createError (400, 'channel already exists')
 export const FAILED_TO_SAVE_MESSENGER = createError (500, 'failed to save new messenger')
 export const MESSENGER_ALREADY_EXISITS = createError (400, 'messenger already exists')
+export const AUTHENTICATED_MEMBER_IS_NOT_ADMIN = createError(401, 'authenticated member is not an admin')
+export const FAILED_TO_SAVE_EVENT = createError (500, 'failed to save new event')

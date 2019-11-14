@@ -9,7 +9,8 @@ const eventTaskSchema=Schema({
         ref:'member',
     },
     task:{
-        type:String
+        type:String,
+        required: true
     },
     event:{
         type:Schema.Types.ObjectId,
@@ -27,14 +28,16 @@ const eventTaskSchema=Schema({
 
 const eventSchema=Schema({
     name:{
-        type:String
+        type:String,
+        required: true,
+        unique: true
     },
     dateTime:{
         type:Date
     },
-    details:{
+    details:[{
         type:String
-    },
+    }],
     tasks:[{
         type:eventTaskSchema
     }],
@@ -49,6 +52,7 @@ const eventSchema=Schema({
 
 })
 
-export default model('event',eventSchema)
-export default model('eventTask',eventTaskSchema)
+const eventModel = model('event', eventSchema) 
+const eventTaskModel = model('eventTask', eventTaskSchema)
+export {eventModel as default, eventTaskModel}
 
