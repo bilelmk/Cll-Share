@@ -42,6 +42,7 @@ test('Should create a new user', async () => {
             variables
         })
     } catch (error) {
+        expect(error.graphQLErrors[0].extensions.code).toBe('BAD_USER_INPUT')
         expect(error.message).toContain('attia.alla@gmail.com')
     }
 })

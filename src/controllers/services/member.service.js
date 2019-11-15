@@ -78,7 +78,7 @@ export const getAuthenticatedMember = (header) => {
 
 export const getMemberById = async (id) => {
     const member = await model.findOne({_id: id})
-    if(! member) throw errors.MEMBER_ID_NOT_FOUND
+    if(! member) throw errors.MEMBER_ID_NOT_FOUND(id)
     return member
 }
 
