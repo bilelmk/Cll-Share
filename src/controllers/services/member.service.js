@@ -8,10 +8,11 @@ const tryToSaveMember = async(member)=>{
         const result = await member.save()
         return result
     } catch (error) {
+        console.log('[memberService Create]: ',error)
         if(error.code == 11000){
             throw errors.UNIQUE_CONSTRAINT_VIOLATION('Member', 'mail', member.mail)
         }
-        throw errors.UNIQUE_CONSTRAINT_VIOLATION('Member', 'mail', member.mail)
+        throw error
     }
 }
 export const createMember = async (data) => {

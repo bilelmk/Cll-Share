@@ -64,7 +64,7 @@ const memberSchema = Schema({
         default:'OFFLINE'
     },
     otherInfo:{
-        type: String, 
+        type: [String] 
     },
     role:{
         type:String,

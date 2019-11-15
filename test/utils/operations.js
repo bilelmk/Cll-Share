@@ -23,6 +23,29 @@ export const signUp = gql`
     }
 `
 
+export const signIn = gql`
+    mutation($data:SignInInput!) {
+        signIn(
+            data: $data
+        ){
+            token,
+            member {
+                id
+                firstName
+                lastName
+                mail
+                password
+                option{
+                    NotifyWorkshops
+                    NotifyEvents
+                    NotifyMeetings
+                    langue
+                }
+            }
+        }
+    }
+`
+
 const getUsers = gql`
     query {
         users {

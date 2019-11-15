@@ -77,7 +77,6 @@ input SignUpInput{
     firstName: String!
     lastName: String!
     photo: CreateFileInput
-    role: MemberRole
     birthDate: String!
     mail: String!
     address: String

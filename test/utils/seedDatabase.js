@@ -1,25 +1,52 @@
-import bcrypt from 'bcryptjs'
-import jwt from 'jsonwebtoken'
 import {connect} from 'mongoose'
 import memberModel from '../../src/models/member'
+import {createAuthPlayloadFromMember} from '../../src/controllers/services/utils/authentication.utils'
+import * as memberService from '../../src/controllers/services/member.service'
 
-const userOne = {
+const memberOne = {
     input: {
-        name: 'Jen',
-        email: 'jen@example.com',
-        password: bcrypt.hashSync('Red098!@#$')
+        firstName: "Omar",
+        lastName: "Hamza",
+        mail: "Omar.Hamza@gmail.com",
+        birthDate: "23 may 1997",
+        password: "omarpass",
+        option: {
+        NotifyWorkshops: false,
+        NotifyEvents: false,
+        NotifyMeetings: true,
+        langue: "FRENCH"},
+        photo:{
+            name: "Omar tof",
+            mimetype:"image/jpeg",
+            encoding: "code"
+        },
+        otherInfo:["study IF4","backend"]
     },
-    user: undefined,
+    member: undefined,
     jwt: undefined
 }
 
-const userTwo = {
+const memberTwo = {
     input: {
-        name: 'Jeff',
-        email: 'jeff@example.com',
-        password: bcrypt.hashSync('PassForJeff')
+        firstName: "Bilel",
+        lastName: "Mekrazi",
+        mail: "Bilel.Mk@gmail.com",
+        birthDate: "23 jun 1996",
+        password: "bilelpass",
+        option: {
+        NotifyWorkshops: false,
+        NotifyEvents: true,
+        NotifyMeetings: false,
+        langue: "FRENCH"
+        },
+        photo:{
+            name: "bilel tof",
+            mimetype:"image/jpeg",
+            encoding: "code"
+        },
+        otherInfo:["study IF5","frontend"]
     },
-    user: undefined,
+    member: undefined,
     jwt: undefined
 }
 
@@ -55,6 +82,19 @@ const commentTwo = {
     comment: undefined
 }
 
+const initMember =async (member)=>{
+    member.member = await memberService.createMember(member.input)
+    member.jwt = (await createAuthPlayloadFromMember(member.member)).token
+    //console.log('\n\n[Member]:', member.member, '\n\ntoken: ',member.jwt, '\n\n')
+}
+
+const initMembers= async() =>{
+    await memberModel.deleteMany({})
+    await initMember(memberOne)
+    await initMember(memberTwo)
+    
+}
+
 const seedDatabase = async () => {
     connect(process.env.MONOGO_DB_ENDPOINT, {
         useNewUrlParser:true,
@@ -62,7 +102,7 @@ const seedDatabase = async () => {
         autoReconnect: true,
         reconnectTries: Number.MAX_VALUE,
         reconnectInterval: 1000})
-    await memberModel.deleteMany({})
+    await initMembers()
     // // Delete test data
     // await prisma.mutation.deleteManyComments()
     // await prisma.mutation.deleteManyPosts()
@@ -139,4 +179,4 @@ const seedDatabase = async () => {
     // })
 }
 
-export { seedDatabase as default, userOne, userTwo, postOne, postTwo, commentOne, commentTwo }
+export { seedDatabase as default, memberOne, memberTwo, postOne, postTwo, commentOne, commentTwo }
