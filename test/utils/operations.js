@@ -46,12 +46,15 @@ export const signIn = gql`
     }
 `
 
-const getUsers = gql`
+export const me = gql`
     query {
-        users {
+        me {
             id
-            name
-            email
+            firstName
+            lastName
+            mail
+            password
+            birthDate
         }
     }
 `

@@ -1,11 +1,11 @@
 import 'cross-fetch/polyfill'
 import {getDataFromToken} from '../src/controllers/services/utils/authentication.utils' 
 import getClientWithoutSubs from './utils/getClientWithoutSubs'
-import {signUp, signIn} from './utils/operations'
+import {signUp, signIn, me} from './utils/operations'
 import seedDatabase,{memberOne} from './utils/seedDatabase'
 import {getMemberById,createMember} from '../src/controllers/services/member.service'
 import * as errors from '../src/controllers/services/utils/errors'
-const client = getClientWithoutSubs()
+let client = getClientWithoutSubs()
 
 beforeEach(seedDatabase)
 
@@ -126,6 +126,29 @@ test('should raise error when signin with incorrect mail', async ()=>{
     }catch(error){
         expect(error.graphQLErrors[0].extensions.code).toBe('BAD_USER_INPUT')
         expect(error.message).toContain('Invalid email or password')
-        
     }
+})
+
+test('should return the correct member when there\'s correct bearer token ', async ()=>{
+    client = getClientWithoutSubs(memberOne.jwt)
+    const response = await client.query({
+                            query: me
+                            })
+    const exists = await getMemberById(response.data.me.id)
+    const tokenData = await getDataFromToken (memberOne.jwt)
+    expect(!!exists).toBe(true)
+    expect(tokenData.id).toEqual(exists.id)
+})
+
+test('should raise authError  when there\'s correct bearer token ', async ()=>{
+    client = getClientWithoutSubs()
+    try {
+        const response = await client.query({
+            query: me
+            })
+    } catch (error) {
+        expect(error.graphQLErrors[0].extensions.code).toBe('UNAUTHENTICATED')
+        expect(error.message).toContain('Auth token is not supplied')
+    }
+    
 })
