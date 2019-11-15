@@ -5,7 +5,7 @@ export const removeDuplicates = (array) => array.filter(
 export const updateObject = (oldObject, newObject)=>{
     Object.keys(newObject).forEach(
         (key) => {
-            if (oldObject[key]){
+            if (oldObject[key]!=undefined ){
                 oldObject[key] = newObject[key]
             } 
         }

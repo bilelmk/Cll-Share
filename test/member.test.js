@@ -1,9 +1,9 @@
 import 'cross-fetch/polyfill'
 import {getDataFromToken} from '../src/controllers/services/utils/authentication.utils' 
 import getClientWithoutSubs from './utils/getClientWithoutSubs'
-import {signUp, signIn, me} from './utils/operations'
+import {signUp, signIn, me, updateMe} from './utils/operations'
 import seedDatabase,{memberOne} from './utils/seedDatabase'
-import {getMemberById,createMember} from '../src/controllers/services/member.service'
+import {getMemberById, getMemberByEmailAndPassword } from '../src/controllers/services/member.service'
 import * as errors from '../src/controllers/services/utils/errors'
 let client = getClientWithoutSubs()
 
@@ -143,12 +143,135 @@ test('should return the correct member when there\'s correct bearer token ', asy
 test('should raise authError  when there\'s correct bearer token ', async ()=>{
     client = getClientWithoutSubs()
     try {
-        const response = await client.query({
+        await client.query({
             query: me
             })
     } catch (error) {
         expect(error.graphQLErrors[0].extensions.code).toBe('UNAUTHENTICATED')
         expect(error.message).toContain('Auth token is not supplied')
+    } 
+})
+
+test('test update password and mail', async ()=>{
+    client = getClientWithoutSubs(memberOne.jwt)
+    const data = {
+        password:"pass",
+        mail:'newomarmail@gmail.com' 
     }
-    
+    //await createMember(data)
+    const variables = {
+        data
+    }
+    const response = await client.mutate({
+        mutation: updateMe,
+        variables
+    })
+
+    expect(memberOne.member.id).toEqual(response.data.updateMe.id)
+    const exists = await getMemberById(response.data.updateMe.id)
+    expect(!!exists).toBe(true)
+    const memberByMailandPass = await getMemberByEmailAndPassword(data.mail, data.password)
+    expect(JSON.stringify(exists)).toEqual(JSON.stringify(memberByMailandPass))
+})
+
+test('test update values mail', async ()=>{
+    client = getClientWithoutSubs(memberOne.jwt)
+    const data = {
+        mail:'newomarmail@gmail.com'
+    }
+    //await createMember(data)
+    const variables = {
+        data
+    }
+    const response = await client.mutate({
+        mutation: updateMe,
+        variables
+    })
+
+    expect(memberOne.member.id).toEqual(response.data.updateMe.id)
+    const exists = await getMemberById(response.data.updateMe.id)
+    expect(!!exists).toBe(true)
+    const memberByMailandPass = await getMemberByEmailAndPassword(data.mail, memberOne.input.password)
+    expect(JSON.stringify(exists)).toEqual(JSON.stringify(memberByMailandPass))
+})
+
+test('should raise error if ujpdate with an existing mail', async ()=>{
+    client = getClientWithoutSubs(memberOne.jwt)
+    const data = {
+        mail:'bilel.mk@gmail.com'
+    }
+    //await createMember(data)
+    const variables = {
+        data
+    }
+
+
+    try {
+        await client.mutate({
+            mutation: updateMe,
+            variables
+        })
+    } catch (error) {
+        expect(error.graphQLErrors[0].extensions.code).toBe('BAD_USER_INPUT')
+        expect(error.message).toContain('bilel.mk@gmail.com')
+    }
+})
+
+test('test update values password', async ()=>{
+    client = getClientWithoutSubs(memberOne.jwt)
+    const data = {
+        password:"pass"
+    }
+    //await createMember(data)
+    const variables = {
+        data
+    }
+    const response = await client.mutate({
+        mutation: updateMe,
+        variables
+    })
+
+    expect(memberOne.member.id).toEqual(response.data.updateMe.id)
+    const exists = await getMemberById(response.data.updateMe.id)
+    expect(!!exists).toBe(true)
+    const memberByMailandPass = await getMemberByEmailAndPassword(memberOne.input.mail, data.password)
+    expect(JSON.stringify(exists)).toEqual(JSON.stringify(memberByMailandPass))
+})
+
+
+test('test update values', async ()=>{
+    client = getClientWithoutSubs(memberOne.jwt)
+    const data = {
+        firstName: "3mirat",
+        lastName: "hamzinou",
+        option:{
+            NotifyWorkshops: true,
+            langue: "ENGLISH"
+        },
+        photo:{
+            name: "mar9a",
+            mimetype: "types/mime",
+            encoding: "48756"
+          }
+    }
+    //await createMember(data)
+    const variables = {
+        data
+    }
+    const response = await client.mutate({
+        mutation: updateMe,
+        variables
+    })
+
+    expect(memberOne.member.id).toEqual(response.data.updateMe.id)
+    const exists = await getMemberById(response.data.updateMe.id)
+    expect(!!exists).toBe(true)
+    expect(exists.photo.name).toEqual("mar9a")
+    expect(exists.photo.mimetype).toEqual("types/mime")
+    expect(exists.photo.encoding).toEqual("48756")
+    expect(exists.firstName).toEqual("3mirat")
+    expect(exists.lastName).toEqual("hamzinou")
+    expect(exists.option.NotifyWorkshops).toEqual(true)
+    expect(exists.option.langue).toEqual("ENGLISH")
+
 })

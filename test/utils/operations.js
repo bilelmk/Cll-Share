@@ -59,12 +59,30 @@ export const me = gql`
     }
 `
 
-const login = gql`
-    mutation($data:LoginUserInput!) {
-        login(
+export const updateMe = gql`
+    mutation($data:UpdateMemberInput!) {
+        updateMe(
             data: $data
         ){
-            token
+            id
+            firstName
+            lastName
+            mail
+            password
+            option{
+                NotifyWorkshops
+                NotifyEvents
+                NotifyMeetings
+                langue
+            }
+            birthDate
+            photo{
+                id
+                mimetype
+                encoding
+                name
+                createdAt
+            }
         }
     }
 `

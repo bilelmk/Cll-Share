@@ -47,7 +47,6 @@ export const updateMember = async (member, data) => {
         } 
     })
     if(updatedOptions){
-        console.log(updatedOptions)
         member.option = new optionModel(updatedOptions)
     }
     if(data.photo){
