@@ -113,6 +113,34 @@ export const createChannel = gql`
     }
 `
 
+export const updateChannel = gql`
+    mutation($id:String, $name:String,$data: UpdateChannelInput!) {
+        updateChannel(
+            id: $id
+            name: $name
+            data: $data
+        ){
+            id
+            name
+            description
+            subject
+            master{
+                id
+                firstName
+                lastName
+            }
+            members{
+                id
+                firstName
+                lastName
+            }
+            posts{
+                id
+            }
+        }
+    }
+`
+
 const getProfile = gql`
     query {
         me {

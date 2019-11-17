@@ -52,6 +52,29 @@ const memberTwo = {
     jwt: undefined
 }
 
+const memberThree = {
+    input: {
+        firstName: "Jalel",
+        lastName: "Fliss",
+        mail: "Joe.Fliss@gmail.com",
+        birthDate: "23 may 1997",
+        password: "jalelpass",
+        option: {
+        NotifyWorkshops: false,
+        NotifyEvents: false,
+        NotifyMeetings: true,
+        langue: "ENGLISH"},
+        photo:{
+            name: "jalel tof",
+            mimetype:"image/jpeg",
+            encoding: "code"
+        },
+        otherInfo:["study IF4","frontend"]
+    },
+    member: undefined,
+    jwt: undefined
+}
+
 const channelOne = {
     input: {
         name: 'channel1',
@@ -98,6 +121,7 @@ const initMembers= async() =>{
     await memberModel.deleteMany({})
     await initMember(memberOne)
     await initMember(memberTwo)
+    await initMember(memberThree)
 }
 
 const initChannel = async(channel, master, members) => {
@@ -198,4 +222,4 @@ const seedDatabase = async () => {
     // })
 }
 
-export { seedDatabase as default, memberOne, memberTwo, channelOne,  channelTwo, commentOne, commentTwo }
+export { seedDatabase as default, memberOne, memberTwo, memberThree,channelOne,  channelTwo, commentOne, commentTwo }
