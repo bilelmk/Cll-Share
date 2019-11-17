@@ -1,7 +1,9 @@
 import {connect} from 'mongoose'
 import memberModel from '../../src/models/member'
+import channelModel from '../../src/models/channel'
 import {createAuthPlayloadFromMember} from '../../src/controllers/services/utils/authentication.utils'
 import * as memberService from '../../src/controllers/services/member.service'
+import * as channelService from '../../src/controllers/services/channel.service'
 
 const memberOne = {
     input: {
@@ -50,22 +52,26 @@ const memberTwo = {
     jwt: undefined
 }
 
-const postOne = {
+const channelOne = {
     input: {
-        title: 'My published post',
-        body: '',
-        published: true
+        name: 'channel1',
+        description: 'channel for project X',
+        subject: 'project X',
+        master: undefined,
+        members: undefined
     },
-    post: undefined
+    channel: undefined
 }
 
-const postTwo = {
+const channelTwo = {
     input: {
-        title: 'My draft post',
-        body: '',
-        published: false
+        name: 'channel2',
+        description: 'channel for project Z',
+        subject: 'project Z',
+        master: undefined,
+        members: undefined
     },
-    post: undefined
+    channel: undefined
 }
 
 const commentOne = {
@@ -92,7 +98,19 @@ const initMembers= async() =>{
     await memberModel.deleteMany({})
     await initMember(memberOne)
     await initMember(memberTwo)
-    
+}
+
+const initChannel = async(channel, master, members) => {
+    channel.input.master = master
+    channel.input.members = members ? [...members] : undefined
+    channel.channel = await channelService.createChannel(channel.input)
+}
+
+const initChannels = async () => {
+    await channelModel.deleteMany({})
+    //console.log('\n\n[memberID]',memberOne.member.id)
+    await initChannel(channelOne, memberOne.member.id, [memberTwo.member.id])
+    await initChannel(channelTwo, memberTwo.member.id)
 }
 
 const seedDatabase = async () => {
@@ -103,6 +121,7 @@ const seedDatabase = async () => {
         reconnectTries: Number.MAX_VALUE,
         reconnectInterval: 1000})
     await initMembers()
+    await initChannels()
     // // Delete test data
     // await prisma.mutation.deleteManyComments()
     // await prisma.mutation.deleteManyPosts()
@@ -179,4 +198,4 @@ const seedDatabase = async () => {
     // })
 }
 
-export { seedDatabase as default, memberOne, memberTwo, postOne, postTwo, commentOne, commentTwo }
+export { seedDatabase as default, memberOne, memberTwo, channelOne,  channelTwo, commentOne, commentTwo }

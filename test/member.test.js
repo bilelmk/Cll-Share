@@ -4,7 +4,6 @@ import getClientWithoutSubs from './utils/getClientWithoutSubs'
 import {signUp, signIn, me, updateMe} from './utils/operations'
 import seedDatabase,{memberOne} from './utils/seedDatabase'
 import {getMemberById, getMemberByEmailAndPassword } from '../src/controllers/services/member.service'
-import * as errors from '../src/controllers/services/utils/errors'
 let client = getClientWithoutSubs()
 
 beforeEach(seedDatabase)
@@ -103,7 +102,6 @@ test('should raise error when signin with incorrect mail', async ()=>{
     }catch(error){
         expect(error.graphQLErrors[0].extensions.code).toBe('BAD_USER_INPUT')
         expect(error.message).toContain('Invalid email or password')
-        
     }
     
     

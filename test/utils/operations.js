@@ -87,6 +87,32 @@ export const updateMe = gql`
     }
 `
 
+export const createChannel = gql`
+    mutation($data: CreateChannelInput!) {
+        createChannel(
+            data: $data
+        ){
+            id
+            name
+            description
+            subject
+            master{
+                id
+                firstName
+                lastName
+            }
+            members{
+                id
+                firstName
+                lastName
+            }
+            posts{
+                id
+            }
+        }
+    }
+`
+
 const getProfile = gql`
     query {
         me {

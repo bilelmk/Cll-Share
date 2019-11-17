@@ -18,7 +18,7 @@ const tryToSaveChannel = async (channel) => {
     try {
         return await channel.save()
     } catch (error) {
-        if (error.code === 11000) throw new Error (`name ${ channel.name } already used`)
+        if (error.code === 11000) throw errors.UNIQUE_CONSTRAINT_VIOLATION('channel', 'name', channel.name)
     }
 }
 
@@ -49,6 +49,7 @@ export const checkMemberBelongsToChannel = (memberId, channel) => {
 } 
 
 export const checkMemberMustBelongToChannel = (memberId, channel)=>{
+    if(!memberId || !channel) throw errors.MEMBER_MUST_BELONGS_TO_CHANNEL
     const result = checkMemberBelongsToChannel(memberId, channel)
     if(!result) throw errors.MEMBER_MUST_BELONGS_TO_CHANNEL
     return result
