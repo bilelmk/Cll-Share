@@ -4,7 +4,7 @@ import channelModel from '../../src/models/channel'
 import {createAuthPlayloadFromMember} from '../../src/controllers/services/utils/authentication.utils'
 import * as memberService from '../../src/controllers/services/member.service'
 import * as channelService from '../../src/controllers/services/channel.service'
-
+import * as messengerService from '../../src/controllers/services/messenger.service'
 const memberOne = {
     input: {
         firstName: "Omar",
@@ -97,6 +97,8 @@ const channelTwo = {
     channel: undefined
 }
 
+
+
 const commentOne = {
     input: {
         text: 'Great post. Thanks for sharing!'
@@ -137,6 +139,10 @@ const initChannels = async () => {
     await initChannel(channelTwo, memberTwo.member.id)
 }
 
+const initMessengers = async () => {
+    await messengerService.createMessenger(memberOne.member.id, memberTwo.member.id)
+}
+
 const seedDatabase = async () => {
     connect(process.env.MONOGO_DB_ENDPOINT, {
         useNewUrlParser:true,
@@ -146,6 +152,7 @@ const seedDatabase = async () => {
         reconnectInterval: 1000})
     await initMembers()
     await initChannels()
+    await initMessengers()
     // // Delete test data
     // await prisma.mutation.deleteManyComments()
     // await prisma.mutation.deleteManyPosts()

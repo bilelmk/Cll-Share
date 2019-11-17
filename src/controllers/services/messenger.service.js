@@ -2,7 +2,7 @@ import messengerModel from '../../models/messenger'
 import * as memberService from './member.service'
 import * as errors from './utils/errors'
 
-const findMessengerByInterlocutorsIds =async (firstInterlocutorId, secondInterlocutorId) => {
+const findMessengerByInterlocutorsIds = async (firstInterlocutorId, secondInterlocutorId) => {
     let messenger = await messengerModel.findOne({
         firstInterlocutor: firstInterlocutorId,
         secondInterlocutor: secondInterlocutorId
@@ -26,7 +26,6 @@ const tryToSaveMessenger = async (messenger) => {
 }
 
 export const createMessenger = async (firstInterlocutorId, secondInterlocutorId) => {
-    console.log('hey')
     await memberService.getMemberById(firstInterlocutorId)
     await memberService.getMemberById(secondInterlocutorId)
     if(await findMessengerByInterlocutorsIds(firstInterlocutorId,secondInterlocutorId)){
@@ -37,7 +36,6 @@ export const createMessenger = async (firstInterlocutorId, secondInterlocutorId)
         secondInterlocutor: secondInterlocutorId,
         messages: []
     }
-    console.log('hey')
     const newMessenger = new messengerModel(docs)
     return await tryToSaveMessenger(newMessenger)
 }
@@ -60,8 +58,16 @@ export const getMessages = (selectorSetting, paginationSetting) => {
     throw new Error ('getMessages query not implemented yet')
 }
 
-export const getMessenger = (id, otherInterlocutor) => {
-    throw new Error ('getMessenger query not implemented yet')
+export const getMessenger = async (id, interlocutors) => {
+    try {
+        if(id) return await messengerModel.findOne({_id:id})
+        if(interlocutors){
+            const {firstInterlocutor, secondInterlocutor} = interlocutors
+            return await findMessengerByInterlocutorsIds(firstInterlocutor, secondInterlocutor)
+        } 
+    } catch (error) {
+        throw errors.UNVALID_SELECTION_OPTIONS
+    }
 }
 
 export const getMessengers = (selectorSetting, paginationSetting) => {
