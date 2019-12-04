@@ -112,5 +112,10 @@ export const getChannel = async (id, name) => {
 export const getChannels = (selectorSetting, paginationSetting) => {
     const {memberId, query} = selectorSetting
     const {orderBy, pagination} = paginationSetting
+}
 
+export const addPostToChannel = async (post, channel) => {
+    console.log('\n\n\n [CHannel]: \n',channel)
+    channel.posts.push(post.id)
+    return await tryToSaveChannel(channel)
 }

@@ -4,6 +4,10 @@ const CommentarySchema=Schema({
     content:{
         type:String
     },
+    author: {
+        type: Schema.Types.ObjectId,
+        ref: 'member'
+    },
     createdAt: {
         type: Date,
         default:  new Date()

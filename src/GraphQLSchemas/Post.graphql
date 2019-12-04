@@ -3,6 +3,7 @@ type Post{
     content: String!
     images: [File!]
     files: [File!]
+    author: Member!
     comments: [Commentary!]
     createdAt: String!
     updatedAt: String!
@@ -11,8 +12,14 @@ type Post{
 type Commentary{
     id: String!
     content: String!
+    author: Member!
     createdAt: String!
     updatedAt: String!
+}
+
+type PostLoad{
+    post: Post!
+    channel: Channel!
 }
 
 extend type Query{
@@ -20,7 +27,7 @@ extend type Query{
     posts(channelId: String, query: String, orderBy:OrderByOption, pagination: PaginationOptionInput): [Post!]!
 }
 extend type Mutation{
-    addPostToChannel(channelId: String, channelName: String, data: CreatePostInput): Post!
+    addPostToChannel(channelId: String, channelName: String, data: CreatePostInput): PostLoad!
     deletePost(id: String!): Post!
     commentAPost(postId: String!, content: String!): Commentary!
     deleteCommentary(id: String!): Commentary!
@@ -31,3 +38,4 @@ input CreatePostInput{
     images: [CreateFileInput!]
     files: [CreateFileInput!]
 }
+

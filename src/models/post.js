@@ -10,9 +10,13 @@ const postSchema = Schema({
     files:[{
         type:fileSchema
     }],
-    comments:{
+    comments:[{
         type:Schema.Types.ObjectId,
         ref:'commentary'
+    }],
+    author: {
+        type: Schema.Types.ObjectId,
+        ref: 'member'
     },
     createdAt: {
         type: Date,

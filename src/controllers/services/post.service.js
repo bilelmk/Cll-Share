@@ -1,5 +1,8 @@
-export const createPost = (data) => {
-    throw new Error ('createPost not implemented yet')
+import model from '../../models/post'
+import * as errors from '../services/utils/errors'
+export const createPost = async (data) => {
+    const newPost = new model(data)
+    return await newPost.save()
 }
 
 export const updatePost = (id, data) => {
@@ -10,8 +13,15 @@ export const deletePost = (id) => {
     throw new Error ('deletePost not implemented yet')
 }
 
-export const getPost = (id) => {
-    throw new Error ('getPost query not implemented yet')
+export const getPostById = async (id) => {
+    const filter = {_id: id}
+    try {
+        const result = await model.findOne(filter)
+        if (result) return result
+        throw new Error()
+    } catch (error) {
+        throw errors.UNVALID_SELECTION_OPTIONS
+    }
 }
 
 export const getPosts = (selectorSetting, paginationSetting) => {

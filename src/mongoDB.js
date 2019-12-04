@@ -1,5 +1,5 @@
 import {connect} from 'mongoose'
-connect(process.env.MONOGO_DB_ENDPOINT, {
+connect(process.env.MONOGO_DB_ENDPOINT , {
     useNewUrlParser:true,
     useCreateIndex:true,
     autoReconnect: true,
