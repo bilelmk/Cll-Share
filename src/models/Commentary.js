@@ -8,6 +8,10 @@ const CommentarySchema=Schema({
         type: Schema.Types.ObjectId,
         ref: 'member'
     },
+    post: {
+        type: Schema.Types.ObjectId,
+        ref: 'post'
+    },
     createdAt: {
         type: Date,
         default:  new Date()

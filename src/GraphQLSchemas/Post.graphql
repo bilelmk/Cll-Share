@@ -4,33 +4,32 @@ type Post{
     images: [File!]
     files: [File!]
     author: Member!
-    comments: [Commentary!]
+    comments: [Comment!]
+    channel: Channel
     createdAt: String!
     updatedAt: String!
 }
 
-type Commentary{
+type Comment{
     id: String!
     content: String!
     author: Member!
+    post: Post!
     createdAt: String!
     updatedAt: String!
 }
 
-type PostLoad{
-    post: Post!
-    channel: Channel!
-}
+
 
 extend type Query{
     post(id: String!): Post!
     posts(channelId: String, query: String, orderBy:OrderByOption, pagination: PaginationOptionInput): [Post!]!
 }
 extend type Mutation{
-    addPostToChannel(channelId: String, channelName: String, data: CreatePostInput): PostLoad!
+    addPostToChannel(channelId: String, channelName: String, data: CreatePostInput): Post!
     deletePost(id: String!): Post!
-    commentAPost(postId: String!, content: String!): Commentary!
-    deleteCommentary(id: String!): Commentary!
+    commentAPost(postId: String!, content: String!): Comment!
+    deleteCommentary(id: String!): Comment!
 }
 
 input CreatePostInput{

@@ -40,9 +40,13 @@ test ( 'should add a post ', async ()=> {
         mutation: addPostToChannel,
         variables
     })
-    const {post, channel} = response.data.addPostToChannel
+    const post = response.data.addPostToChannel
+    const {channel} = post
+    delete post['channel']
+    //console.log(post)
+    //console.log(channel)
     const exists = await service.getPostById(post.id)
-    console.log(exists)
+    //console.log(exists)
     expect(exists.author.toString()).toEqual(memberOne.member.id.toString())
     expect(exists.content).toEqual(data.content)
     expect(exists.images.map(image=> { return {name: image.name, encoding: image.encoding, mimetype: image.mimetype}})).toContainEqual(data.images[0])
@@ -51,6 +55,48 @@ test ( 'should add a post ', async ()=> {
     expect(exists.files.map(image=> { return {name: image.name, encoding: image.encoding, mimetype: image.mimetype}})).toContainEqual(data.files[1])
     expect(channel.id.toString()).toEqual(channelOne.channel.id.toString())
     expect(channel.posts).toContainEqual(post)
+})
 
+test('should raise not allowed error',async ()=> {
+    let client = getClientWithoutSubs(memberThree.jwt)
+    const data = {
+        content: "post1",
+        images: [
+            {
+                name: "photo1",
+                mimetype: "mimetype",
+                encoding: "encoding"
+            },{
+                name: "photo2",
+                mimetype: "mimetype",
+                encoding: "encoding"
+            }
+        ],
+        files: [
+            {
+                name: "file1",
+                mimetype: "mimetype",
+                encoding: "encoding"
+            },{
+                name: "file2",
+                mimetype: "mimetype",
+                encoding: "encoding"
+            }
+        ]
+    }
+    const variables = {
+        data,
+        channelId: channelOne.channel.id
+    }
+    try {
+        await client.mutate({
+            mutation: addPostToChannel,
+            variables
+        })
+    } catch (error) {
+        expect(error.graphQLErrors[0].extensions.code).toBe('UNAUTHENTICATED')
+        expect(error.message).toContain('member must belong to channel')
+    } 
+    
 
 })

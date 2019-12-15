@@ -1,21 +1,21 @@
 import {connect} from 'mongoose'
 import * as messengerService from '../../src/controllers/services/messenger.service'
 import {memberOne, memberTwo, memberThree, initMembers} from './databaseMock/memberMock'
-import {channelOne, channelTwo, initChannels} from './databaseMock/channelMock'
+import {channelOne, channelTwo, initChannels, postOne, commentOne} from './databaseMock/channelMock'
 
-const commentOne = {
-    input: {
-        text: 'Great post. Thanks for sharing!'
-    },
-    comment: undefined
-}
+// const commentOne = {
+//     input: {
+//         text: 'Great post. Thanks for sharing!'
+//     },
+//     comment: undefined
+// }
 
-const commentTwo = {
-    input: {
-        text: 'I am glad you enjoyed it.'
-    },
-    comment: undefined
-}
+// const commentTwo = {
+//     input: {
+//         text: 'I am glad you enjoyed it.'
+//     },
+//     comment: undefined
+// }
 
 const initMessengers = async () => {
     await messengerService.createMessenger(memberOne.member.id, memberTwo.member.id)
@@ -34,4 +34,4 @@ const seedDatabase = async () => {
 
 }
 
-export { seedDatabase as default, memberOne, memberTwo, memberThree,channelOne,  channelTwo, commentOne, commentTwo }
+export { seedDatabase as default, memberOne, memberTwo, memberThree,channelOne,  channelTwo, commentOne, postOne }

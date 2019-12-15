@@ -6,7 +6,7 @@ export const MEMBER_ID_NOT_FOUND = (id)=> new UserInputError(`Member Id ${id} is
 export const SELECTION_OPTIONS_MISSING = new UserInputError('selection options are missing')
 export const UNVALID_SELECTION_OPTIONS = new UserInputError('selection options are unvalide')
 export const ACCESS_DENIED = new ForbiddenError( 'you don\'t have the permition to this action')
-export const MEMBER_MUST_BELONGS_TO_CHANNEL = new UserInputError('member must belong to channel')
+export const MEMBER_MUST_BELONGS_TO_CHANNEL = new AuthenticationError('member must belong to channel')
 export const CHANNEL_ALREADY_EXISITS = new UserInputError('channel already exists')
 export const FAILED_TO_SAVE_MESSENGER = new ApolloError( 'failed to save new messenger')
 export const MESSENGER_ALREADY_EXISITS = new UserInputError('messenger already exists')

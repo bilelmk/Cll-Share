@@ -75,25 +75,23 @@ export const addPostToChannel = gql`
             channelName: $channelName
             data: $data
         ){
-            post{
+            id
+            content
+            comments{
                 id
-                content
-                comments{
-                    id
-                }
-                author{
-                    id
-                }
-                images{
-                    name
-                    mimetype
-                    encoding
-                }
-                files{
-                    name
-                    mimetype
-                    encoding
-                }
+            }
+            author{
+                id
+            }
+            images{
+                name
+                mimetype
+                encoding
+            }
+            files{
+                name
+                mimetype
+                encoding
             }
             channel{
                 id
@@ -119,7 +117,35 @@ export const addPostToChannel = gql`
                     }
                 }
             }
+        }
+    }
+`
+
+export const commentAPost = gql`
+    mutation($content: String!, $postId: String!) {
+        commentAPost(
+            content: $content
+            postId: $postId
+        ){
+            id
+            content
+            author{
+                id
+            }
+            post{
+                id
+                comments{
+                    id 
+                    content
+                    author{
+                        id
+                    }
+                }
+            }
+            
+            
             
         }
     }
 `
+

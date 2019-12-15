@@ -5,7 +5,7 @@ const tryTOSaveEvent = async (event) => {
     try {
         return await event.save()
     } catch (error) {
-        console.log(error)
+        //console.log(error)
         if(error.code == 11000){
             throw new Error (`name ${event.name} is already used`)
         }

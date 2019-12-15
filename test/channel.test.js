@@ -283,7 +283,7 @@ test('should raise error when update channel master with a member who does not b
             variables
         })
     } catch (error) {
-        expect(error.graphQLErrors[0].extensions.code).toBe('BAD_USER_INPUT')
+        expect(error.graphQLErrors[0].extensions.code).toBe('UNAUTHENTICATED')
         expect(error.message).toContain('member must belong to channel')
     }  
 })

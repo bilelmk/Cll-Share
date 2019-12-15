@@ -3,7 +3,7 @@ import * as memberService from '../../services/member.service'
 import * as service from '../../services/event.service'
 const mutations = {
     async createEvent(parent, {data}, {request}, info){
-        console.log(data)
+        //console.log(data)
         const member = await adminAuthGuard(request)
         return await service.createEvent(data)
     },

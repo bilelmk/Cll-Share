@@ -5,7 +5,7 @@ import Member from './Member'
 import Messenger from './Messenger'
 import Post from './Post'
 import Workshop from './Workshop'
-
+import Comment from './Comment'
 const types = {
     Channel,
     Event,
@@ -13,7 +13,8 @@ const types = {
     Member,
     Messenger,
     Post,
-    Workshop
+    Workshop,
+    Comment
 }
 
 export default types

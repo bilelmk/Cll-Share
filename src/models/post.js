@@ -18,6 +18,10 @@ const postSchema = Schema({
         type: Schema.Types.ObjectId,
         ref: 'member'
     },
+    channel: {
+        type: Schema.Types.ObjectId,
+        ref: 'channel'
+    },
     createdAt: {
         type: Date,
         default:  new Date()
