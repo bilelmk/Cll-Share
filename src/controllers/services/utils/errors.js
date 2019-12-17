@@ -14,3 +14,6 @@ export const MESSENGER_ALREADY_EXISITS = new UserInputError('messenger already e
 export const AUTHENTICATED_MEMBER_IS_NOT_ADMIN = new AuthenticationError( 'authenticated member is not an admin')
 export const FAILED_TO_SAVE_EVENT = new ApolloError( 'failed to save new event')
 export const UNIQUE_CONSTRAINT_VIOLATION = (entity, key, value) => new UserInputError( `this ${key} of value ${value} for ${entity} is already taken`)
+export const VALIDATION_ERROR = (entity, keys, errors) => new UserInputError(`validation error on entity ${entity} 
+    ${keys.map((key) => `${key}: ${errors[key].message}`)}
+`) 

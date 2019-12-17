@@ -4,7 +4,7 @@
 export * from './operations/channelOperations'
 export * from './operations/memberOperations'
 export * from './operations/messengerOperations'
-
+export * from './operations/eventOperations'
 // const getProfile = gql`
 //     query {
 //         me {

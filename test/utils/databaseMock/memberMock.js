@@ -80,6 +80,7 @@ const initMember =async (member)=>{
 export const initMembers= async() =>{
     await memberModel.deleteMany({})
     await initMember(memberOne)
+    await memberService.makeMemberAnAdmin(memberOne.member)
     await initMember(memberTwo)
     await initMember(memberThree)
 }

@@ -1,9 +1,7 @@
 import {Schema, model} from 'mongoose'
-import * as member from './member'
 
 
 const eventTaskSchema=Schema({
-    
     member:{
         type:Schema.Types.ObjectId,
         ref:'member',
@@ -11,10 +9,6 @@ const eventTaskSchema=Schema({
     task:{
         type:String,
         required: true
-    },
-    event:{
-        type:Schema.Types.ObjectId,
-        ref:'event'
     },
     createdAt: {
         type: Date,

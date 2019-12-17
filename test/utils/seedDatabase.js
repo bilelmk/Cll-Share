@@ -3,6 +3,7 @@ import {connect} from 'mongoose'
 import {memberOne, memberTwo, memberThree, initMembers} from './databaseMock/memberMock'
 import {channelOne, channelTwo, initChannels, postOne, commentOne} from './databaseMock/channelMock'
 import {messengerOne, initMessengers, messageOne} from './databaseMock/messengerMock'
+import {initEvents, eventOne} from './databaseMock/eventMock'
 // const commentOne = {
 //     input: {
 //         text: 'Great post. Thanks for sharing!'
@@ -28,7 +29,8 @@ const seedDatabase = async () => {
     await initMembers()
     await initChannels()
     await initMessengers()
+    await initEvents()
 
 }
 
-export { seedDatabase as default, memberOne, memberTwo, memberThree,channelOne,  channelTwo, commentOne, postOne, messageOne, messengerOne }
+export { seedDatabase as default, memberOne, memberTwo, memberThree,channelOne,  channelTwo, commentOne, postOne, messageOne, messengerOne, eventOne }

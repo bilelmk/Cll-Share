@@ -12,7 +12,6 @@ type EventTask{
     id: String!
     member: Member!
     task: String!
-    event: Event!
     createdAt: String!
     updatedAt: String!
 }
@@ -36,18 +35,18 @@ input CreateEventInput{
     name: String!
     dateTime: String!
     details: [String!]
-    tasks: CreateTasksInput
+    tasks: [CreateTaskInput!]
 }
 
 input UpdateEventInput{
     name: String
     dateTime: String
     details: [String!]
-    tasksToAdd: CreateTasksInput
+    tasksToAdd: [CreateTaskInput!]
     tasksIdToRemove: [String!]
 }
 
-input CreateTasksInput{
-    memberId: [String!]!
+input CreateTaskInput{
+    member: String!
     task: String!
 }

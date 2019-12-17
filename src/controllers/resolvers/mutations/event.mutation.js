@@ -3,18 +3,16 @@ import * as memberService from '../../services/member.service'
 import * as service from '../../services/event.service'
 const mutations = {
     async createEvent(parent, {data}, {request}, info){
-        //console.log(data)
-        const member = await adminAuthGuard(request)
+        await adminAuthGuard(request)
         return await service.createEvent(data)
     },
     async updateEvent(parent, {id, data}, {request}, info){
-        authGuard() 
-        authneticatedUserShouldBeAdmin()
-        service.updateEvent(id, data)
+        await adminAuthGuard(request)
+        const event = await service.getEvent(id)
+        return await service.updateEvent(event, data)
     },
     async deleteEvent(parent, {id}, {request}, info){
-        authGuard()
-        authneticatedUserShouldBeAdmin()
+        await adminAuthGuard(request)
         service.deleteEvent(id)
     }
 }

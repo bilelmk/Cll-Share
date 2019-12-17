@@ -25,16 +25,17 @@ export const signUp = async (data) => {
   return authenticationUtils.createAuthPlayloadFromMember(member)
 }
 
-export const authneticatedUserIsAdmin = (params) => {
-  //not implimented yet
-  let isAdmin = false
-  //return true if admin else false
-  return isAdmin
+export const memberMustBeAnAdmin = (member) => {
+  if(member.role != 'ADMIN') throw errors.AUTHENTICATED_MEMBER_IS_NOT_ADMIN 
+  return true
 }
+
+
+
 export const adminAuthGuard = async (req) => {
   const tokenData = await extractDataFromRequest(req)
   const authenticatedMember = await memberService.getMemberById(tokenData.id)
-  if(authenticatedMember.role != 'ADMIN') throw errors.AUTHENTICATED_MEMBER_IS_NOT_ADMIN 
+  memberMustBeAnAdmin(authenticatedMember)
   return authenticatedMember
 }
 

@@ -7,7 +7,7 @@ export const createComment = async (data) => {
 }
 
 export const getCommentById = async (id) => {
-    if(!id) throw errors.SELECTION_OPTIONS_MISSING('message')
+    if(!id) throw errors.SELECTION_OPTIONS_MISSING('comment')
     const filter = {_id: id}
     try {
         const result = await model.findOne(filter)

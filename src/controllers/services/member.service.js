@@ -60,8 +60,11 @@ export const deleteMember = (id) => {
     throw new Error ('deleteMember not implemented yet')
 }
 
-export const changeMemberRole = () => {
-    throw new Error ('changeMemberRole not implemented yet')
+export const makeMemberAnAdmin = async (member) => {
+    if(member.role != 'ADMIN'){
+      member.role = 'ADMIN'
+      return await tryToSaveMember(member)
+    }
 }
 
 export const updateAuthenticatedMember = () => {
