@@ -54,18 +54,6 @@ export const updateChannel = gql`
     }
 `
 
-export const createMessenger = gql`
-    mutation($otherInterlocutorId: String!){
-        createMessenger(otherInterlocutorId: $otherInterlocutorId)
-        {
-            id
-            firstInterlocutor{id firstName lastName mail password}
-            secondInterlocutor{id firstName lastName mail password}
-            messages{id}
-            createdAt
-        } 
-    }
-`
 
 
 export const addPostToChannel = gql`

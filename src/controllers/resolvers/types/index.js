@@ -3,6 +3,7 @@ import Event from './Event'
 import Meeting from './Meeting'
 import Member from './Member'
 import Messenger from './Messenger'
+import Message from './Message'
 import Post from './Post'
 import Workshop from './Workshop'
 import Comment from './Comment'
@@ -12,6 +13,7 @@ const types = {
     Meeting,
     Member,
     Messenger,
+    Message,
     Post,
     Workshop,
     Comment

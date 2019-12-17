@@ -97,14 +97,14 @@ export const getChannel = async (id, name) => {
             name
         }
     }else {
-        throw errors.SELECTION_OPTIONS_MISSING
+        throw errors.SELECTION_OPTIONS_MISSING('channel')
     }
     try {
         const result = await model.findOne(filter)
         if (result) return result
         throw new Error()
     } catch (error) {
-        throw errors.UNVALID_SELECTION_OPTIONS
+        throw errors.UNVALID_SELECTION_OPTIONS('channel', filter)
     }
     
 }

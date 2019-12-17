@@ -10,7 +10,7 @@ const Post = {
         
     },
     comments (parent, args, cnxt, info){
-        console.log(parent.comments)
+        //console.log(parent.comments)
         return parent.comments.map(id => getCommentById(id))
         
     },
@@ -18,7 +18,7 @@ const Post = {
         return await getMemberById(parent.author)
     },
     async channel (parent, args, cnxt, info){
-        console.log(parent)
+        //console.log(parent)
         const result = await getChannel(parent.channel)
         return result
     }

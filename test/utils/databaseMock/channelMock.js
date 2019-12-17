@@ -1,4 +1,6 @@
 import channelModel from '../../../src/models/channel'
+import postModel from '../../../src/models/post'
+import commentModel from '../../../src/models/Commentary'
 import * as channelService from '../../../src/controllers/services/channel.service'
 import {memberOne, memberTwo} from './memberMock'
 import * as postService from '../../../src/controllers/services/post.service'
@@ -65,6 +67,8 @@ const initComment = async (comment, post, author) => {
 
 export const initChannels = async () => {
     await channelModel.deleteMany({})
+    await postModel.deleteMany()
+    await commentModel.deleteMany()
     //console.log('\n\n[memberID]',memberOne.member.id)
     await initChannel(channelOne, memberOne.member.id, [memberTwo.member.id])
     await initChannel(channelTwo, memberTwo.member.id)

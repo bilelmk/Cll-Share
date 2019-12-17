@@ -1,8 +1,8 @@
 import {connect} from 'mongoose'
-import * as messengerService from '../../src/controllers/services/messenger.service'
+
 import {memberOne, memberTwo, memberThree, initMembers} from './databaseMock/memberMock'
 import {channelOne, channelTwo, initChannels, postOne, commentOne} from './databaseMock/channelMock'
-
+import {messengerOne, initMessengers, messageOne} from './databaseMock/messengerMock'
 // const commentOne = {
 //     input: {
 //         text: 'Great post. Thanks for sharing!'
@@ -17,9 +17,6 @@ import {channelOne, channelTwo, initChannels, postOne, commentOne} from './datab
 //     comment: undefined
 // }
 
-const initMessengers = async () => {
-    await messengerService.createMessenger(memberOne.member.id, memberTwo.member.id)
-}
 
 const seedDatabase = async () => {
     connect(process.env.MONOGO_DB_ENDPOINT, {
@@ -34,4 +31,4 @@ const seedDatabase = async () => {
 
 }
 
-export { seedDatabase as default, memberOne, memberTwo, memberThree,channelOne,  channelTwo, commentOne, postOne }
+export { seedDatabase as default, memberOne, memberTwo, memberThree,channelOne,  channelTwo, commentOne, postOne, messageOne, messengerOne }

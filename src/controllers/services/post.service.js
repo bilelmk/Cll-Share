@@ -23,13 +23,14 @@ export const deletePost = (id) => {
 }
 
 export const getPostById = async (id) => {
+    if(!id) throw errors.SELECTION_OPTIONS_MISSING('message')
     const filter = {_id: id}
     try {
         const result = await model.findOne(filter)
         if (result) return result
         throw new Error()
     } catch (error) {
-        throw errors.UNVALID_SELECTION_OPTIONS
+        throw errors.UNVALID_SELECTION_OPTIONS('Post', filter)
     }
 }
 

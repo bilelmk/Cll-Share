@@ -17,6 +17,10 @@ const messageSchema=Schema({
         ref:'member',
         required:true
     },
+    messenger:{
+        type:Schema.Types.ObjectId,
+        ref:'messenger'
+    },
     createdAt: {
         type: Date,
         default:  new Date()

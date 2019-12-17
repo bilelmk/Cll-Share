@@ -3,7 +3,7 @@
 
 export * from './operations/channelOperations'
 export * from './operations/memberOperations'
-
+export * from './operations/messengerOperations'
 
 // const getProfile = gql`
 //     query {

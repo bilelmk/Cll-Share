@@ -47,7 +47,7 @@ test ( 'should comment a post ', async ()=> {
             variables
         })
     } catch (error) {
-        expect(error.graphQLErrors[0].extensions.code).toBe('UNAUTHENTICATED')
+        expect(error.graphQLErrors[0].extensions.code).toBe('FORBIDDEN')
         expect(error.message).toContain('member must belong to channel')
     } 
 })

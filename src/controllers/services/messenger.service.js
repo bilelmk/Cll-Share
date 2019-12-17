@@ -1,6 +1,9 @@
 import messengerModel from '../../models/messenger'
+import messageModel from '../../models/message'
 import * as memberService from './member.service'
 import * as errors from './utils/errors'
+
+
 
 const findMessengerByInterlocutorsIds = async (firstInterlocutorId, secondInterlocutorId) => {
     let messenger = await messengerModel.findOne({
@@ -13,11 +16,12 @@ const findMessengerByInterlocutorsIds = async (firstInterlocutorId, secondInterl
             firstInterlocutor: secondInterlocutorId
         })
     }
-    return !!messenger
+    return messenger
 }
 
 const tryToSaveMessenger = async (messenger) => {
     try {
+        //console.log('trying to save messenger')
         return await messenger.save()
     }catch(error){
         console.error(error)
@@ -25,10 +29,17 @@ const tryToSaveMessenger = async (messenger) => {
     }
 }
 
+export const checkMemberMustBelongToMessenger = (memberId, messenger) => {
+    if((messenger.firstInterlocutor != memberId) && (messenger.secondInterlocutor != memberId)){
+        throw errors.MEMBER_MUST_BELONGS_TO_MESSENGER
+    }
+    return true
+}
+
 export const createMessenger = async (firstInterlocutorId, secondInterlocutorId) => {
     await memberService.getMemberById(firstInterlocutorId)
     await memberService.getMemberById(secondInterlocutorId)
-    if(await findMessengerByInterlocutorsIds(firstInterlocutorId,secondInterlocutorId)){
+    if(!!(await findMessengerByInterlocutorsIds(firstInterlocutorId,secondInterlocutorId))){
         throw errors.MESSENGER_ALREADY_EXISITS
     }
     const docs = {
@@ -44,12 +55,38 @@ export const updateMessenger = (id, data) => {
     throw new Error ('updateMessenger not implemented yet')
 }
 
-export const addMessageToMessenger = (id) => {
-    throw new Error ('addMessageToMessenger not implemented yet')
+const checkDataOfCreationMessage = async (data) => {
+    const messenger = await getMessenger(data.messenger)
+    checkMemberMustBelongToMessenger(data.author, messenger)
 }
 
-export const getMessage = (id) => {
-    throw new Error ('getMessage query not implemented yet')
+export const createMessage = async (data) => {
+    await checkDataOfCreationMessage(data)
+    const newMessage = new messageModel(data)
+    return await newMessage.save()
+} 
+
+export const addMessageToMessenger = async (message, messenger) => {
+    //console.log('[add heh to heha]: ', messenger)
+    messenger.messages.push(message)
+    //console.log('[add heh to heha]: ye7lili')
+    const result = await tryToSaveMessenger(messenger)
+    //console.log(result)
+    return 
+}
+
+export const getMessage = async (id) => {
+    if(!id) throw errors.SELECTION_OPTIONS_MISSING('message')
+    const filter = {_id: id}
+    try {
+        //console.log( await messageModel.find())
+        const result = await messageModel.findOne(filter)
+        if (result) return result
+        throw new Error()
+    } catch (error) {
+        //console.log('[Message error]: ',error)
+        throw errors.UNVALID_SELECTION_OPTIONS('message', filter)
+    }
 }
 
 export const getMessages = (selectorSetting, paginationSetting) => {
@@ -59,14 +96,29 @@ export const getMessages = (selectorSetting, paginationSetting) => {
 }
 
 export const getMessenger = async (id, interlocutors) => {
+    let filter = {}
+    //console.log('[getMessenger Interlocutors]: ',interlocutors)
     try {
-        if(id) return await messengerModel.findOne({_id:id})
-        if(interlocutors){
+        let result = null
+        //console.log('all messengers: ', await messengerModel.find() )
+        if(id) {
+            filter = {_id: id} 
+            result = await messengerModel.findOne(filter)
+        }
+        else if(interlocutors){
+            //console.log('[getMessenger 1 Interlocutors]: ',interlocutors)
             const {firstInterlocutor, secondInterlocutor} = interlocutors
-            return await findMessengerByInterlocutorsIds(firstInterlocutor, secondInterlocutor)
+            result = await findMessengerByInterlocutorsIds(firstInterlocutor, secondInterlocutor)
         } 
+        else {
+            //console.log('[getMessenger 2 Interlocutors]: ',interlocutors)
+            throw errors.SELECTION_OPTIONS_MISSING('Messenger')
+        }
+        if(!result) throw new Error()
+        return result
     } catch (error) {
-        throw errors.UNVALID_SELECTION_OPTIONS
+        //console.log('[error]: ',error)
+        throw errors.UNVALID_SELECTION_OPTIONS('Messenger', filter)
     }
 }
 

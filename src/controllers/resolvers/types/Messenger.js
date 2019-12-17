@@ -5,6 +5,7 @@ const Messenger = {
     },
     secondInterlocutor: async ( parent, data, ctxt, info)=>{
         return await getMemberById(parent.secondInterlocutor)
-    }
+    },
+    //messages: async (parent, data, ctxt, info) => {}
 }
 export default Messenger

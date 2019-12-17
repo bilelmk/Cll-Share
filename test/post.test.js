@@ -94,7 +94,7 @@ test('should raise not allowed error',async ()=> {
             variables
         })
     } catch (error) {
-        expect(error.graphQLErrors[0].extensions.code).toBe('UNAUTHENTICATED')
+        expect(error.graphQLErrors[0].extensions.code).toBe('FORBIDDEN')
         expect(error.message).toContain('member must belong to channel')
     } 
     

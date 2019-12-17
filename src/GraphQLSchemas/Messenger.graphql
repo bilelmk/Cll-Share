@@ -13,6 +13,7 @@ type Message{
     content: String!
     images: [File!]
     files: [File!]
+    messenger: Messenger!
     createdAt: String!
     updatedAt: String!
 }
