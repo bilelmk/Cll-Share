@@ -16,8 +16,7 @@ export class MenuComponent implements OnInit {
 
   theme = 'light';
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   LightTheme(){
     this.homepage.LightTheme();
