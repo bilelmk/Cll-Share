@@ -1,0 +1,65 @@
+$white-color: rgb(255, 255, 255);
+$dark-color: rgb(49, 49, 49);
+$purple: rgb(148, 16, 224);
+$bg: url("/assets/img/bg.jpg");
+
+$msg-padding-top: 11px;
+$msg-padding-sides : 12px;
+$border-radius: 25px;
+
+
+.msg-text{
+    border-radius: 18px;
+    color: white;
+    padding-top: $msg-padding-top;
+    padding-left: $msg-padding-sides;
+    padding-right: $msg-padding-sides;
+    padding-bottom: 0px;
+    width: 70%;
+}
+
+.mymsg{
+    background: $bg;
+}
+
+
+.ans{
+    background: $purple;
+}
+
+.conv {
+    width:100%;
+    //-webkit-background: $bg no-repeat;
+    background: $white-color;
+    background-size: cover;
+    
+    
+}
+
+.msg-input{
+    bottom: 8px;
+    position: fixed;
+    margin: 3px;
+    width: 95%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    position: fixed;
+}
+
+.msg-input-text{
+    border-radius: $border-radius;
+    border: 2px solid rgb(0, 132, 255);
+}
+
+.inbox-box{
+    padding-bottom:80px;
+}
+
+.home-btn{
+    position: fixed; z-index: 100; right: 15px;
+    
+}
+
+
+
+

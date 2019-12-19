@@ -1,0 +1,38 @@
+<ion-menu side="start" menuId="first" class="theme" id="menu">
+    <ion-header>
+        <ion-toolbar>
+            <div padding>
+                <img src="../../../assets/img/thumbnail.png">
+            </div>
+        </ion-toolbar>
+    </ion-header>
+    <ion-content>
+        <ion-list>
+            <ion-row class="theme-selector" justify-content-center>
+                <ion-icon class="theme-btn" name="moon" (click)="DarkTheme()" padding></ion-icon>  
+                <ion-icon class="theme-btn" name="sunny" (click)="LightTheme()" padding></ion-icon>
+            </ion-row>
+
+            <ion-item>
+                <ion-icon name="home" color="auto" padding></ion-icon>Home
+            </ion-item>
+
+            <ion-item>
+                <ion-icon name="globe" color="auto" padding></ion-icon>Channels
+            </ion-item>
+            <ion-item>
+                <ion-icon name="person" color="auto" padding></ion-icon>Users
+            </ion-item>
+            <ion-item>
+                <ion-icon name="calendar" color="auto" padding></ion-icon>Agenda
+            </ion-item>
+            
+            
+
+        </ion-list>
+    </ion-content>
+</ion-menu>
+
+
+
+<ion-router-outlet main></ion-router-outlet>
