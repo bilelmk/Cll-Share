@@ -1,9 +1,17 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>agenda</ion-title>
+  <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+    
+    
+    
+      
+    
   </ion-toolbar>
 </ion-header>
+<app-menu (messageToEmit)="getThemeSignal($event)"></app-menu>
 
-<ion-content>
+<ion-content id="screen">
 
 </ion-content>

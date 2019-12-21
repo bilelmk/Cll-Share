@@ -12,8 +12,6 @@ export class HomePage implements OnInit {
 
   theme: string;
 
-  
-
   constructor(private thememanager: ThemeService ) {}
 
   getThemeSignal(themesignal: string){
