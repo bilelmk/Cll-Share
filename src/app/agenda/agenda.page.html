@@ -1,17 +1,26 @@
+
 <ion-header>
   <ion-toolbar color="primary">
       <ion-buttons slot="start">
           <ion-menu-button></ion-menu-button>
-      </ion-buttons>
-    
-    
-    
-      
-    
+      </ion-buttons>    
   </ion-toolbar>
 </ion-header>
 <app-menu (messageToEmit)="getThemeSignal($event)"></app-menu>
 
 <ion-content id="screen">
+    <ion-title padding justify-content-center>
+        {{ currentMonth }}
+    </ion-title>
+    <calendar id="myCalendar"
+    locale="fr-FR"
+    calendarMode="month" 
+    startHour="6"
+    endHour="20"
+    step="30"
+    startingDayWeek="1"
+    [currentDate]="currentDate"
+    (onTitleChanged)="onViewTitleChanged($event)">
+  </calendar>
 
 </ion-content>

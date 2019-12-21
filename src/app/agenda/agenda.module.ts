@@ -4,8 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { IonicModule } from '@ionic/angular';
-
+import { NgCalendarModule  } from 'ionic2-calendar';
 import { AgendaPage } from './agenda.page';
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
+registerLocaleData(localeFr, 'fr');
+
 
 const routes: Routes = [
   {
@@ -20,6 +24,7 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     SharedModule,
+    NgCalendarModule,
     RouterModule.forChild(routes)
   ],
   declarations: [AgendaPage]

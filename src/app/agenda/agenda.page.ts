@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { ThemeService } from '../services/theme.service';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { TemplatePage } from '../template/template.page';
-
+import { CalendarComponent } from 'ionic2-calendar/calendar';
 
 @Component({
   selector: 'app-agenda',
@@ -9,6 +8,16 @@ import { TemplatePage } from '../template/template.page';
   styleUrls: ['./agenda.page.scss'],
 })
 export class AgendaPage extends TemplatePage implements OnInit {
+
+  currentDate = new Date();
+
+  currentMonth: string;
+
+  @ViewChild(CalendarComponent, {static: false}) myCalendar: CalendarComponent;
+
+  onViewTitleChanged(title: string) {
+    this.currentMonth = title;
+  }
 
   ngOnInit() {
     this.LightTheme(); 
