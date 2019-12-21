@@ -12,7 +12,7 @@
     
   </ion-toolbar>
 </ion-header>
-<app-menu></app-menu>
+<app-menu (messageToEmit)="getThemeSignal($event)"></app-menu>
 
 <ion-content id="screen">
   <ion-slides pager="true">

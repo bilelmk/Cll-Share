@@ -1,29 +1,37 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { MenuController } from '@ionic/angular';
-import { ThemeService } from 'src/app/services/theme.service';
-import { HomePage } from 'src/app/home/home.page';
-
 
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss'],
 })
-export class MenuComponent implements OnInit {
 
-  constructor(private menu: MenuController, private thememanager: ThemeService, private homepage: HomePage) { }
-  
+export class MenuComponent implements OnInit {
 
   theme = 'light';
 
+  @Output() messageToEmit = new EventEmitter<string>();
+
+  sendMessageToParent(message: string) {
+    this.messageToEmit.emit(message);
+  }
+
+  // tslint:disable-next-line: max-line-length
+  constructor(private menu: MenuController) {}
+
   ngOnInit() {}
 
+  /*GetPage(): string {
+    return this.router.url;
+  }
+
   LightTheme(){
-    this.homepage.LightTheme();
+    // this.homepage.LightTheme();
     this.theme = 'light';
   }
   DarkTheme(){
-    this.homepage.DarkTheme();
+    // this.homepage.DarkTheme();
     this.theme = 'dark';
   }
   SwitchTheme(){
@@ -35,5 +43,5 @@ export class MenuComponent implements OnInit {
       this.LightTheme();
     }
 
-  }
+  }*/
 }

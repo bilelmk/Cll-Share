@@ -1,5 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import { ThemeService } from '../services/theme.service';
+import { Route } from '@angular/compiler/src/core';
 
 
 @Component({
@@ -7,9 +8,23 @@ import { ThemeService } from '../services/theme.service';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage implements OnInit {
 
-  constructor(private thememanager: ThemeService) {}
+  theme: string;
+
+  
+
+  constructor(private thememanager: ThemeService ) {}
+
+  getThemeSignal(themesignal: string){
+    this.theme = themesignal;
+    if (this.theme === 'light'){
+      this.LightTheme();
+    } else if (this.theme === 'dark'){
+      this.DarkTheme();
+    }
+    console.log(this.theme);
+  }
 
   ngOnInit() {
     this.LightTheme(); 

@@ -6,6 +6,10 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { ChannelsPage } from './channels.page';
+import { SharedModule } from '../shared/shared.module';
+
+
+
 
 const routes: Routes = [
   {
@@ -19,6 +23,7 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
+    SharedModule,
     RouterModule.forChild(routes)
   ],
   declarations: [ChannelsPage]

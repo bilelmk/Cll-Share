@@ -3,11 +3,8 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { ThemeService } from '../services/theme.service';
 import { HomePage } from './home.page';
-import { MenuComponent } from '../components/menu/menu.component';
-
-import { NgCalendarModule  } from 'ionic2-calendar';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -15,15 +12,15 @@ import { NgCalendarModule  } from 'ionic2-calendar';
     CommonModule,
     FormsModule,
     IonicModule,
+    SharedModule,
     RouterModule.forChild([
       {
         path: '',
         component: HomePage
       }
     ]),
-    NgCalendarModule
   ],
-  declarations: [HomePage, MenuComponent]
+  declarations: [HomePage]
 })
 export class HomePageModule {}
 
