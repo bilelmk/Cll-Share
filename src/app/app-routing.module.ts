@@ -14,6 +14,7 @@ const routes: Routes = [
   { path: 'channels', loadChildren: './channels/channels.module#ChannelsPageModule' },
   { path: 'users', loadChildren: './users/users.module#UsersPageModule' },
   { path: 'agenda', loadChildren: './agenda/agenda.module#AgendaPageModule' },
+  { path: 'settings', loadChildren: './settings/settings.module#SettingsPageModule' },
   
 ];
 
