@@ -8,9 +8,14 @@
     </ion-header>
     <ion-content>
         <ion-list>
+            <ion-row class="avatar-row" justify-content-center>
+                <ion-avatar style="width: 130px; height: 130px;">
+                    <img src="../../../assets/img/user/user2.jpg" >
+                </ion-avatar>
+            </ion-row>
             <ion-row class="theme-selector" justify-content-center>
-                <ion-icon class="theme-btn" name="moon" (click)="sendMessageToParent('dark')" padding></ion-icon>  
-                <ion-icon class="theme-btn" name="sunny" (click)="sendMessageToParent('light')" padding></ion-icon>
+                    <ion-icon class="theme-btn" name="moon" (click)="sendMessageToParent('dark')" padding></ion-icon>  
+                    <ion-icon class="theme-btn" name="sunny" (click)="sendMessageToParent('light')" padding></ion-icon>
             </ion-row>
 
             <ion-item href="/">
@@ -25,6 +30,10 @@
             </ion-item>
             <ion-item href="/agenda">
                 <ion-icon name="calendar" color="auto" padding></ion-icon>Agenda
+            </ion-item>
+
+            <ion-item>
+                <ion-icon name="log-out" color="auto" padding></ion-icon>Log Out
             </ion-item>
             
             

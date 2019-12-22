@@ -6,6 +6,7 @@ import { SharedModule } from '../shared/shared.module';
 import { IonicModule } from '@ionic/angular';
 import { NgCalendarModule  } from 'ionic2-calendar';
 import { AgendaPage } from './agenda.page';
+import { NotificationsComponent } from 'src/app/components/notifications/notifications.component';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 registerLocaleData(localeFr, 'fr');
@@ -27,6 +28,6 @@ const routes: Routes = [
     NgCalendarModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [AgendaPage]
+  declarations: [AgendaPage, NotificationsComponent]
 })
 export class AgendaPageModule {}
